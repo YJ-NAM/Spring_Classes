@@ -1,0 +1,2 @@
+car = com.nonspring.di03.Truck
+engine = com.nonspring.di03.Engine

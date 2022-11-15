@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="getsum" class="com.spring.di01.GetSum"></bean>
+	<bean id="mySum" class="com.spring.di01.MyGetSum">
+		<property name="su1" value="200" />
+		<property name="su2" value="100" />
+		<property name="getSum">
+			<ref bean="getsum"/>
+		</property>
+	</bean>
+
+</beans>
