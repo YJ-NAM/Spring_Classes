@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<!-- 
+		 <context:annotation-config> 
+			 : 해당 태그는 특정 패키지 안에 있는 클래스 중에서 
+			 @Configuration, @Bean, @Autowired, @Resource 애노테이션이 존재하면
+			 해당 애노테이션을 인식할 수 있도록 만들어주는 태그
+	 -->
+	 
+	<context:annotation-config/>
+	 
+	<bean class="com.spring.di09.Config" />
+	
+	<bean id="player3" class="com.spring.di09.Player">
+		<constructor-arg value="아몬드" />
+		<constructor-arg value="3" />
+		<constructor-arg>
+			<list>
+				<value>구르기전문가</value>
+				<value>갈색</value>
+			</list>		
+		</constructor-arg>
+		<constructor-arg value="100" />
+		<constructor-arg value="50" />
+	</bean>
+
+</beans>
