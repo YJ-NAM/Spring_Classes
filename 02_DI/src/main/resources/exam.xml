@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 
+		bean 태그의 속성 설명
+		- class : bean(객체)의 클래스 이름 - 패키지명 포함	
+		- id : bean(객체)의 고유 식별자
+		- property 태그
+		  ==> bean(객체) 생성 시 setter에 전달할 인수(인자)
+		- constructor-arg 태그
+		  ==> bean(객체) 생성 시 인자 생성자에 전달할 인수(인자)
+	 -->
+	<bean id="exam" class="com.spring.di03.Exam">
+		<!-- 인자 생성자를 이용하여 주입하는 방법 -->
+		<constructor-arg value="안녕하세요! 스프링에 오신 걸 환영합니다." />
+	</bean>
+</beans>

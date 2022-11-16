@@ -108,7 +108,15 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-	
+		
+		<!-- lombok 라이브러리 -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.24</version>
+		    <scope>provided</scope>
+		</dependency>		
+			
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
