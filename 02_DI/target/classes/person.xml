@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Person.java / 인자생성자 -> constructor-arg 넣어서 bean 생성 -->
+	<bean id="person1" class="com.spring.di04.Person">
+		<constructor-arg value="홍길동" />
+		<constructor-arg value="남자" />
+		<constructor-arg value="28" /> <!-- 자동으로 int 타입으로 변환됨 -->
+		<constructor-arg value="941212-1234567" />
+	</bean>
+	
+	<bean id="person2" class="com.spring.di04.Person">
+		<constructor-arg value="예제씨" />
+		<constructor-arg value="여자" />
+		<constructor-arg value="44" /> 
+		<constructor-arg value="661212-1234567" />
+	</bean>
+	
+	<bean id="person3" class="com.spring.di04.Person">
+		<constructor-arg value="메가커피" />
+		<constructor-arg value="남자" />
+		<constructor-arg value="88" /> 
+		<constructor-arg value="221212-1234567" />
+	</bean>
+			
+	<bean id="info1" class="com.spring.di04.PersonInfo">
+		<!-- setPerson(Person) -> person1 참조하도록 -->
+		<constructor-arg>
+			<ref bean="person1" />
+		</constructor-arg>
+	</bean>
+	
+	<bean id="info2" class="com.spring.di04.PersonInfo">
+		<constructor-arg>
+			<ref bean="person2" />
+		</constructor-arg>
+	</bean>
+	
+	<bean id="info3" class="com.spring.di04.PersonInfo">
+		<constructor-arg>
+			<ref bean="person3" />
+		</constructor-arg>
+	</bean>
+
+</beans>

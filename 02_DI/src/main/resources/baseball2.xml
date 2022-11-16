@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--
+	<bean id="team" class="com.spring.di06.BaseballTeam" >
+		<constructor-arg value="김경문" />
+		<constructor-arg value="이승엽" />
+		<constructor-arg value="선동렬" />
+		<constructor-arg value="양의지" />
+		<constructor-arg value="양현종" />
+	</bean> 
+-->
+
+<!-- 
+	네임스페이스
+	==> <property> 태그나 <constructor-arg> 태그를 사용하다 보면 작성해야 할 xml 문서의 내용이
+	    전반적으로 증가하게 됨
+	    이것을 좀 더 짧게 작성하게 해주는 것이 네임스페이스임
+	    
+	    - 속성(setter) 주입 시에는 p라는 네임스페이스를 사용함
+	      형식) p : 매개변수이름 = "값" 또는 
+	           p : 매개변수이름-ref = "참조할 객체의 id(식별자)"
+	           
+	    - 인자 생성자 주입 시에는 c라는 네임스페이스를 사용함
+          형식) c: 매개변수이름="값" 또는
+               c: 매개변수이름-ref="참조할 객체의 id(식별자)"
+
+ -->
+ 
+ <bean id="team" class="com.spring.di06.BaseballTeam"
+ 	c:manager="남윤수" c:battingCoach="남서식" c:pitcherCoach="부송주" 
+ 	c:hitter="김유리" c:pitcher="남윤지"
+ >
+ 	
+ </bean>
+	
+	
+</beans>

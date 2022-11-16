@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="hcar" class="com.spring.di05.HyundaiCar" />
+	<bean id="kcar" class="com.spring.di05.KiaCar" />
+	<bean id="tcar" class="com.spring.di05.Tesla" />
+	<bean id="carimpl" class="com.spring.di05.CarImpl">
+		<property name="car">
+			<ref bean="hcar"/>
+		</property>
+	</bean>
+</beans>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="player1" class="com.spring.di06.Player">
+		<constructor-arg value="강백호" />
+		<constructor-arg value="27" />
+		<!-- ArrayList - list -->
+		<constructor-arg>
+			<list>
+				<value>4번타자</value>
+				<value>1루수</value>
+			</list>		
+		</constructor-arg>
+		<constructor-arg value="105" />
+		<constructor-arg value="188" />
+	</bean>
+	
+    <bean id="playerinfo" class="com.spring.di06.PlayerInfo">
+        <constructor-arg>
+            <ref bean="player1" />
+        </constructor-arg>
+    </bean>
+</beans>
