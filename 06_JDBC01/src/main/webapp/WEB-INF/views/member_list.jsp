@@ -23,7 +23,7 @@
             </tr>
             <c:set var="list" value="${ memList }" />
             <c:if test="${ !empty list }">
-                <c:forEach items="${list }" var="dto">
+                <c:forEach items="${ list }" var="dto">
                     <tr>
                         <td> ${ dto.getNum() } </td>
                         <td><a href="${ pageContext.request.contextPath }/member_content.do?num=${ dto.getNum() }">

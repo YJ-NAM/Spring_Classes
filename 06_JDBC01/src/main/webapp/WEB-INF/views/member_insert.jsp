@@ -16,11 +16,11 @@
 			<table>
 				<tr>
 					<th>ID</th>
-					<td><input type="text" name="memId" /></td>
+					<td><input type="text" name="memid" /></td>
 				</tr>
 				<tr>
 					<th>Name</th>
-					<td><input type="text" name="memName" /></td>
+					<td><input type="text" name="memname" /></td>
 				</tr>			
 				<tr>
 					<th>Password</th>

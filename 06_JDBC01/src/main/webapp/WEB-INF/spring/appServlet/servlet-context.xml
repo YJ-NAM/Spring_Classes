@@ -21,9 +21,9 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<!-- 해당 패키지에 @Controller, @Service, @Component,
-	     @Repository 애노테이션이 있으면 해당 클래스를 자동으로 
-	     빈으로 등록해 주는 태그. -->
+	<!-- 
+		해당 패키지에 @Controller, @Service, @Component, @Repository 
+		애노테이션이 있으면 해당 클래스를 자동으로 빈으로 등록해 주는 태그. -->
 	<context:component-scan base-package="com.khie" />
 	
 	
