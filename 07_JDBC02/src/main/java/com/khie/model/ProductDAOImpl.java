@@ -105,9 +105,25 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public int updateProduct(ProductDTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateProduct(final ProductDTO dto) {
+		sql = "update products set category_fk = ?, products_name = ?, ep_code_fk = ?, input_price = ?, output_price = ?, trans_cost = ?, mileage = ?, company = ? where pnum = ?";
+		return this.template.update(sql, new PreparedStatementSetter() {
+			
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setString(1, dto.getCategory_fk());
+				ps.setString(2, dto.getProducts_name());
+				ps.setString(3, dto.getEp_code_fk());
+				ps.setInt(4, dto.getInput_price());
+				ps.setInt(5, dto.getOutput_price());
+				ps.setInt(6, dto.getTrans_cost());
+				ps.setInt(7, dto.getMileage());
+				ps.setString(8, dto.getCompany());	
+				ps.setInt(9, dto.getPnum());
+				System.out.println(sql);
+			}
+		});
+		
 	}
 
 	@Override

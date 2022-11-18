@@ -32,6 +32,7 @@
 		<hr />
 		<br />
 		<form method="post" action="${ pageContext.request.contextPath }/product_modify_Ok.do">
+		<input type="hidden" name="pnum" value="${ cont.pnum }"/>
 		<table class="table">
 			<tr>
 				<th>Category</th>
@@ -39,7 +40,7 @@
 				<c:if test="${ !empty cList }">
 					<select name="category_fk" id="" class="form-select">
 					<c:forEach items="${ cList }" var="list">
-						<option value="${ cont.category_fk }" selected="selected">${ list.category_code } [ ${ list.category_name } ] </option>
+						<option value="${ cont.category_fk }"<c:if test='${ cont.category_fk eq list.category_code }'> selected="selected"</c:if>>${ list.category_code } [ ${ list.category_name } ] </option>
 					</c:forEach>
 					</select>
 				</c:if>
@@ -62,7 +63,7 @@
 			</tr>	
 			<tr>	
 				<td colspan="4" align="center">
-					<input type="submit" class="btn btn-primary" value="ADD" />
+					<input type="submit" class="btn btn-success" value="MODIFY" />
 					<input type="reset" class="btn btn-warning" value="REWRITE"/>
 					<input type="button" class="btn btn-secondary" value="LIST" onclick="location.href='product_list.do'"/>
 				</td>

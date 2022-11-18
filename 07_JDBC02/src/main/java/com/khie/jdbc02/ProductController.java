@@ -52,7 +52,6 @@ public class ProductController {
 	public String content(@RequestParam("pnum") int no, Model model) {
 		ProductDTO dto = this.dao.getProductCont(no);
 		String category_name = this.dao.getCategoryList(dto.getCategory_fk());
-		System.out.println(category_name);
 		model.addAttribute("category", category_name);
 		model.addAttribute("content", dto);
 		return "product_content";		
@@ -65,6 +64,19 @@ public class ProductController {
 		model.addAttribute("category", category);
 		model.addAttribute("content", dto);
 		return "product_modify";		
+	}
+	
+	@RequestMapping("product_modify_Ok.do")
+	public void modify_Ok(ProductDTO dto, HttpServletResponse response) throws IOException {
+		
+		int result = this.dao.updateProduct(dto);
+		PrintWriter out = response.getWriter();
+		if(result > 0) {
+			out.println("<script>alert('Successfully modified'); location.href='product_content.do?pnum="+dto.getPnum()+"'</script>");
+		}else {
+			out.println("<script>alert('Modification failed'); history.back(); </script>");
+		}
+		
 	}
 
 }
