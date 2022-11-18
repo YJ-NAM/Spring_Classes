@@ -120,22 +120,34 @@ public class ProductDAOImpl implements ProductDAO {
 				ps.setInt(7, dto.getMileage());
 				ps.setString(8, dto.getCompany());	
 				ps.setInt(9, dto.getPnum());
-				System.out.println(sql);
 			}
 		});
 		
 	}
 
 	@Override
-	public int deleteProduct(int pnum) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteProduct(final int pnum) {
+		sql = "delete from products where pnum = ?";
+		return this.template.update(sql, new PreparedStatementSetter() {
+			
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setInt(1, pnum);
+				
+			}
+		});	
 	}
 
 	@Override
-	public void updateSeq(int pnum) {
-		// TODO Auto-generated method stub
-
+	public void updateSeq(final int pnum) {
+		sql = "update products set pnum = pnum - 1 where pnum > ?";
+		this.template.update(sql, new PreparedStatementSetter() {
+			
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setInt(1, pnum);				
+			}
+		});
 	}
 
 	@Override
