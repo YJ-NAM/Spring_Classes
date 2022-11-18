@@ -67,8 +67,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping("product_modify_Ok.do")
-	public void modify_Ok(ProductDTO dto, HttpServletResponse response) throws IOException {
-		
+	public void modify_Ok(ProductDTO dto, HttpServletResponse response) throws IOException {		
 		int result = this.dao.updateProduct(dto);
 		PrintWriter out = response.getWriter();
 		if(result > 0) {
@@ -77,6 +76,18 @@ public class ProductController {
 			out.println("<script>alert('Modification failed'); history.back(); </script>");
 		}
 		
+	}
+	
+	@RequestMapping("product_delete.do")
+	public void delete(int pnum, HttpServletResponse response) throws IOException {
+		int result = this.dao.deleteProduct(pnum);
+		this.dao.updateSeq(pnum);
+		PrintWriter out = response.getWriter();
+		if(result > 0) {
+			out.println("<script>alert('Successfully deleted'); location.href='product_list.do'</script>");
+		}else {
+			out.println("<script>alert('Deletion failed'); history.back(); </script>");
+		}
 	}
 
 }
