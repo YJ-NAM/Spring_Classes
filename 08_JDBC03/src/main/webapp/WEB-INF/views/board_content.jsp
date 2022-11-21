@@ -44,13 +44,31 @@
 			</tr>	
 			<tr>
 				<td colspan="5">
-				<input type="button" value="Modify" class="btn btn-success btn-md" onclick="location.href='board_modify.do?no=${ dto.board_no }';" />
-				<input type="button" value="Delete" class="btn btn-danger btn-md" onclick="if(confirm('정말 삭제하시겠습니까? 삭제 시 복구할 수 없습니다.')){ location.href='board_delete.do?no=${ dto.board_no }'; }else { return; }" />
-				<input type="button" value="List" class="btn btn-secondary btn-md" onclick="location.href='board_list.do';" />
+				<button type="button" class="btn btn-success btn-md" onclick="location.href='board_modify.do?no=${ dto.board_no }';" >Modify</button>
+				<button type="button" class="btn btn-danger btn-md" data-toggle="modal" data-target="#pwdEnter" >Delete</button>
+				<button type="button" class="btn btn-secondary btn-md" onclick="location.href='board_list.do';" >List</button>
 				</td>
-			</tr>		
+			</tr>
 		</table>
 		</c:if>
+	    <div class="modal search-modal" id="pwdEnter" tabindex="-1" aria-labelledby="pwdEnterLabel" aria-hidden="true">
+	        <div class="modal-dialog modal-lg modal-dialog-centered">
+	            <div class="modal-content">
+	                <div class="modal-header">
+	                    <h5 class="modal-title">비밀번호를 입력하세요.</h5>
+	                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+	                        <span aria-hidden="true">&times;</span>
+	                    </button>
+	                </div>
+	                <div class="modal-body">
+	                    <form name="pwdForm" method="post" action="<%=request.getContextPath()%>/board_delete.do">
+	                    <input type="text" name="board_pwd" placeholder="Enter your Password" />
+	                    <button type="submit">Password</button>
+	                    </form>
+	                </div>
+	            </div>
+	        </div>
+	    </div>		
 	</div>
 </body>
 </html>
