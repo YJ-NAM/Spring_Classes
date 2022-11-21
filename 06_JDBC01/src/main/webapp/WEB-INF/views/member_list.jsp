@@ -80,24 +80,22 @@ color: white;
 		<br />
 
 		<div align="center">
-		<div style="width: 38em;">
-		
-			<form method="post"
-				action="<%=request.getContextPath()%>/member_search.do">
-				<span class="study_search_left" style="width: 20em"> <span
-					class="col-lg"> <span
-						class="input-group list-search-form w-70">
+		<div style="width: 38em;">		
+			<form method="post" action="<%=request.getContextPath()%>/member_search.do">
+				<span class="study_search_left" style="width: 20em"> 
+				<span class="col-lg"> 
+					<span class="input-group list-search-form w-70">
 						<select name="field" class="custom-select col-sm-4">
 								<option value="id" <c:if test="${field == 'id'}"> selected="selected"</c:if>>아이디</option>
 								<option value="name" <c:if test="${field == 'name'}"> selected="selected"</c:if>>이름</option>
 								<option value="job" <c:if test="${field == 'job'}"> selected="selected"</c:if>>직업</option>
-						</select> <input type="text" name="keyword" value="${keyword}" class="form-control"
-							style="width: 20em;" />
-							<button type="submit" class="btn btn-secondary ml-1">
-								<i class="fa fa-search"></i> 검색
+						</select> 
+						<input type="text" name="keyword" value="${keyword}" class="form-control" style="width: 20em;" />
+							<button type="submit" class="btn btn-secondary ml-1"><i class="fa fa-search"></i> 검색
 							</button>
-
-					</span></span></span>
+					</span>
+				</span>
+				</span>
 			</form>
 			</div>
 		</div>

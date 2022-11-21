@@ -71,9 +71,9 @@ public class ProductController {
 		int result = this.dao.updateProduct(dto);
 		PrintWriter out = response.getWriter();
 		if(result > 0) {
-			out.println("<script>alert('Successfully modified'); location.href='product_content.do?pnum="+dto.getPnum()+"'</script>");
+			out.println("<script> alert('Successfully modified'); location.href='product_content.do?pnum="+dto.getPnum()+"'; </script>");
 		}else {
-			out.println("<script>alert('Modification failed'); history.back(); </script>");
+			out.println("<script> alert('Modification failed'); history.back(); </script>");
 		}
 		
 	}
@@ -84,9 +84,9 @@ public class ProductController {
 		this.dao.updateSeq(pnum);
 		PrintWriter out = response.getWriter();
 		if(result > 0) {
-			out.println("<script>alert('Successfully deleted'); location.href='product_list.do'</script>");
+			out.println("<script> alert('Successfully deleted'); location.href='product_list.do'; </script>");
 		}else {
-			out.println("<script>alert('Deletion failed'); history.back(); </script>");
+			out.println("<script> alert('Deletion failed'); history.back(); </script>");
 		}
 	}
 

@@ -57,7 +57,7 @@
 				<td colspan="6" align="center">
 					<c:if test="${ !empty cont }">
 					<input type="button" class="btn btn-success" value="MODIFY" onclick="location.href='product_modify.do?pnum=${ cont.pnum }'"/>
-					<input type="button" class="btn btn-primary" value="DELETE" onclick="if(confirm('Do you really want to delete it? Once it's done, you cannot restore it.')) { location.href='product_delete.do?pnum=${ cont.pnum }' }else { return; }"/>
+					<input type="button" class="btn btn-danger" value="DELETE" onclick="if(confirm('Do you really want to delete it? Once it is done, you cannot restore it.')) { location.href='product_delete.do?pnum=${ cont.pnum }' }else { return; }"/>
 					</c:if>
 					<input type="button" class="btn btn-secondary" value="LIST" onclick="location.href='product_list.do'"/>
 				</td>
