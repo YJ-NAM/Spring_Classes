@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="resources/css/css.css" />
 </head>
 <body>
-	<div>
+	<div class="wrap">
 		<hr />
 		<h3>Write Form</h3>
 		<hr />

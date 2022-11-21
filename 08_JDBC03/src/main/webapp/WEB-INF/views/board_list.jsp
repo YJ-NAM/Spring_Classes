@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="resources/css/css.css" />
 </head>
 <body>
-	<div>
+	<div class="wrap">
 		<hr />
 		<h3>BOARD List Page</h3>
 		<hr />

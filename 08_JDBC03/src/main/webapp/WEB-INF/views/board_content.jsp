@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="resources/css/css.css" />
 </head>
 <body>
-	<div>
+	<div class="wrap">
 		<c:if test="${ empty dto }">
 			<tr>
 				<td colspan="4">no data</td>
@@ -45,30 +45,36 @@
 			<tr>
 				<td colspan="5">
 				<button type="button" class="btn btn-success btn-md" onclick="location.href='board_modify.do?no=${ dto.board_no }';" >Modify</button>
-				<button type="button" class="btn btn-danger btn-md" data-toggle="modal" data-target="#pwdEnter" >Delete</button>
+				<button type="button" class="btn btn-danger btn-md" data-bs-toggle="modal" data-bs-target="#pwdEnter" >Delete</button>
 				<button type="button" class="btn btn-secondary btn-md" onclick="location.href='board_list.do';" >List</button>
 				</td>
 			</tr>
 		</table>
 		</c:if>
-	    <div class="modal search-modal" id="pwdEnter" tabindex="-1" aria-labelledby="pwdEnterLabel" aria-hidden="true">
-	        <div class="modal-dialog modal-lg modal-dialog-centered">
+	</div>
+
+
+	    <div class="modal" id="pwdEnter" tabindex="-1" aria-labelledby="pwdEnterLabel" aria-hidden="true">
+	        <div class="modal-dialog modal-dialog-centered">
 	            <div class="modal-content">
 	                <div class="modal-header">
-	                    <h5 class="modal-title">비밀번호를 입력하세요.</h5>
-	                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-	                        <span aria-hidden="true">&times;</span>
-	                    </button>
+	                    <h5 class="modal-title fs-5">비밀번호를 입력하세요.</h5>
+	                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	                </div>
 	                <div class="modal-body">
-	                    <form name="pwdForm" method="post" action="<%=request.getContextPath()%>/board_delete.do">
-	                    <input type="text" name="board_pwd" placeholder="Enter your Password" />
-	                    <button type="submit">Password</button>
-	                    </form>
+	                	<div class="row py-4">
+	                    <form name="pwdForm" method="post" action="${ pageContext.request.contextPath }/board_delete.do" class="col-lg-6 mx-auto">
+	                    	<input type="password" class="form-control" name="board_pwd" placeholder="Enter your Password" />
+	                	</div>
 	                </div>
+	                <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				        <input type="reset" class="btn btn-warning" value="Reset" />
+				        <input type="submit" class="btn btn-danger" value="Delete" />
+		                </form>
+				    </div>
 	            </div>
 	        </div>
-	    </div>		
-	</div>
+	    </div>
 </body>
 </html>
