@@ -50,17 +50,17 @@
 	<update id="seq">
 		<![CDATA[update member10 set num = num - 1 where num > #{ num }]]>
 	</update>
-	<!-- id 중복 안되도록 유의! -->
+	<!-- id 중복 안되도록 유의! '|| => " --> 
   	<select id="allSearch" parameterType="String" resultType="com.spring.model.MemberDTO">
-		select * from member10 where (memid like '%' || #{keyword} || '%') or (memname like '%' || #{keyword} || '%') or (job like '%' || #{keyword} || '%') order by num desc
+		select * from member10 where (memid like '%'||#{keyword}||'%') or (memname like '%'||#{keyword}||'%') or (job like '%'||#{keyword}||'%') order by num desc
 	</select> 
 	<select id="id" parameterType="String" resultType="com.spring.model.MemberDTO">
-		select * from member10 where memid like '%' || #{keyword} || '%' order by num desc
+		select * from member10 where memid like '%'||#{keyword}||'%' order by num desc
 	</select>	
 	<select id="name" parameterType="String" resultType="com.spring.model.MemberDTO">
-		select * from member10 where memname like '%' || #{keyword} || '%' order by num desc
+		select * from member10 where memname like '%'||#{keyword}||'%' order by num desc
 	</select>
 	<select id="job" parameterType="String" resultType="com.spring.model.MemberDTO">
-		select * from member10 where job like '%' || #{keyword} || '%' order by num desc
+		select * from member10 where job like '%'||#{keyword}||'%' order by num desc
 	</select> 
 </mapper>

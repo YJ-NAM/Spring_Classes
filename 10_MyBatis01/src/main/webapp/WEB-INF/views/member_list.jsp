@@ -18,27 +18,25 @@
 
 	function darkMode() {
 		let dark = $("#dark");
-		dark.on("click", function() {
-			if(dark.hasClass("btn-outline-dark")){
-				$("body").css("background-color", "#292c2b");
-				$("body").css("color", "#d1e7dd");
-				$(".table").css("background-color", "#759f8c");
-				$(".table").css("color", "#d1e7dd");
-				$("a").css("color", "#E5D9B6");			
-				dark.text("Light");
-				dark.removeClass('btn-outline-dark');
-				dark.addClass('btn-outline-light');
-			}else{
-				$("body").css("background-color", "");
-				$("body").css("color", "");
-				$(".table").css("background-color", "");
-				$(".table").css("color", "");
-				$("a").css("color", "");	
-				dark.text("Dark");
-				dark.removeClass('btn-outline-light');
-				dark.addClass('btn-outline-dark');
-			}
-		});
+		if(dark.hasClass("btn-outline-dark")){
+			$("body").css("background-color", "#292c2b");
+			$("body").css("color", "#d1e7dd");
+			$(".table").css("background-color", "#759f8c");
+			$(".table").css("color", "#d1e7dd");
+			$("a").css("color", "#E5D9B6");			
+			dark.text("Light");
+			dark.removeClass('btn-outline-dark');
+			dark.addClass('btn-outline-light');
+		}else{
+			$("body").css("background-color", "");
+			$("body").css("color", "");
+			$(".table").css("background-color", "");
+			$(".table").css("color", "");
+			$("a").css("color", "");	
+			dark.text("Dark");
+			dark.removeClass('btn-outline-light');
+			dark.addClass('btn-outline-dark');
+		}
 	}
 
 </script>
