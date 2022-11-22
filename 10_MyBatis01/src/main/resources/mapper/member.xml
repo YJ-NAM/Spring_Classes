@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+	DTD(Document Type Definition)
+	- 작성한 문서가 어떤 문서인지에 대해서 정의해 놓은 것
+	- 하나의 시스템 내에서 사용할 XML 데이터의 구조를 정의하여 유효성 점검 시 사용하는 태그	
+ -->
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- 
+	namespace명은 패키지명을 포함해서 DAO 인터페이스 이름으로 작성하는 것이 관례임
+	namespace명은 mapper들을 구분하는데 식별자로 사용됨
+	MemberDAOImpl -> getMemberList()의 this.sqlSession.selectList("all")
+ -->
+<mapper namespace="com.spring.model.MemberDAO">
+	<select id="all" resultType="com.spring.model.MemberDTO">
+		select * from member10 order by num desc
+	</select>
+	<insert id="add" parameterType="com.spring.model.MemberDTO">
+		insert into member10 values (
+			(select max(num) from member10) + 1, #{memid}, #{memname}, 
+			#{pwd}, #{age}, 0, sysdate, #{addr}, #{job})
+	</insert>
+	<!-- 
+	회원 등록하는 쿼리문 작성 
+    parameterType 결과가 들어오는 값 
+    resultType 결과가 나가는 값 -->
+	<select id="content" parameterType="int" resultType="com.spring.model.MemberDTO">
+		select * from member10 where num = #{num}
+	</select>
+	<update id="edit" parameterType="com.spring.model.MemberDTO" >
+		update member10 set age = #{age}, mileage = #{mileage}, job = #{job}, 
+		addr = #{addr} where num = #{num}
+	</update>
+</mapper>
