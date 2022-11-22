@@ -34,8 +34,7 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public int deleteMember(int num) {
-		return this.sqlSession.delete("del", num);
-		
+		return this.sqlSession.delete("del", num);		
 	}
 
 	@Override
@@ -45,8 +44,7 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public List<MemberDTO> searchMemberList(String field, String keyword) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.sqlSession.selectList(field, keyword);
 	}
 
 }

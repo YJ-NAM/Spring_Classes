@@ -19,11 +19,25 @@
 	function darkMode() {
 		let dark = $("#dark");
 		dark.on("click", function() {
-			$("body").css("backgroundColor", "black");			
-			dark.text("Light");
-			dark.toggle()
-			dark.removeClass('btn-outline-dark');
-			dark.addClass('btn-outline-light');
+			if(dark.hasClass("btn-outline-dark")){
+				$("body").css("background-color", "#292c2b");
+				$("body").css("color", "#d1e7dd");
+				$(".table").css("background-color", "#759f8c");
+				$(".table").css("color", "#d1e7dd");
+				$("a").css("color", "#E5D9B6");			
+				dark.text("Light");
+				dark.removeClass('btn-outline-dark');
+				dark.addClass('btn-outline-light');
+			}else{
+				$("body").css("background-color", "");
+				$("body").css("color", "");
+				$(".table").css("background-color", "");
+				$(".table").css("color", "");
+				$("a").css("color", "");	
+				dark.text("Dark");
+				dark.removeClass('btn-outline-light');
+				dark.addClass('btn-outline-dark');
+			}
 		});
 	}
 
@@ -32,15 +46,21 @@
 <body>
 	<div class="wrap">
 		<hr />
+		<c:if test="${ not empty keyword }">
+		<h3>This is what you are looking for : ${ keyword }</h3>
+		</c:if>
+		<c:if test="${ empty keyword }">
 		<h3>Member10 회원 List Page</h3>
+		</c:if>
 		<hr />
 		<br />
 		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 			<button type="button" id="dark" class="btn btn-outline-dark me-md-2" onclick="darkMode();" >Dark</button>		
 		</div>
+		<br />
 		<table class="table">
 			<tr class="table-success">
-				<th class="col-2">No</th> 
+				<th class="col-2">No.</th> 
 				<th class="col-4">Name</th>
 				<th class="col-3">Job</th>
 				<th class="col-3">Registered Date</th>
@@ -63,6 +83,9 @@
 			<tr>
 				<td colspan="4">
 				<button type="button" class="btn btn-success" onclick="location.href='member_insert.do'">Register</button>
+				<c:if test="${ not empty keyword }">
+					<button type="button" class="btn btn-secondary" onclick="location.href='member_list.do'">List</button>
+				</c:if>
 				</td>
 			</tr>
 		</table>
@@ -70,12 +93,12 @@
 		<div class="search d-inline">
 			<form action="${ pageContext.request.contextPath }/member_search.do" method="post">
 				<select name="field" class="form-select d-inline w-25" >
-					<option value="all">전체</option>
-					<option value="id">아이디</option>
-					<option value="name">이름</option>
-					<option value="job">직업</option>
+					<option value="allSearch"<c:if test="${ field eq 'allSearch' }">checked='checked'</c:if>>전체</option>
+					<option value="id"<c:if test="${ field eq 'id' }">checked='checked'</c:if>>아이디</option>
+					<option value="name"<c:if test="${ field eq 'name' }">checked='checked'</c:if>>이름</option>
+					<option value="job"<c:if test="${ field eq 'job' }">checked='checked'</c:if>>직업</option>
 				</select>
-				<input type="text" name="keyword" class="form-control d-inline w-50" />
+				<input type="text" name="keyword" value="${ keyword }" class="form-control d-inline w-50" />
 				<button class="btn btn-secondary" type="submit">Search</button>
 			</form>
 		</div>

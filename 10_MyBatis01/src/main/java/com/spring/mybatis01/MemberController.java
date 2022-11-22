@@ -87,5 +87,14 @@ public class MemberController {
 			out.println("<script> alert('Invalid password'); history.back(); </script>");
 		}
 	}
+	
+	@RequestMapping("member_search.do")
+	public String search(@RequestParam("field") String field, @RequestParam("keyword") String keyword, Model model) {
+		List<MemberDTO> search = this.dao.searchMemberList(field, keyword);
+		model.addAttribute("List", search);
+		model.addAttribute("field", field);
+        model.addAttribute("keyword", keyword);
+		return "member_list";
+	}
 
 }

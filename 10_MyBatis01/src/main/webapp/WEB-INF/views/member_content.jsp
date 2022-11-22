@@ -30,8 +30,10 @@
 			</c:if>	
 			<c:if test="${ not empty cont }">
 			<tr>
-				<th class="col-2 table-success">No</th><td class="col-3">${ cont.num }</td>
-				<th class="col-2 table-success">Registered Date</th><td class="col-5">${ cont.regdate }</td>
+				<th class="col-2 table-success">No.</th>
+				<td class="col-4">${ cont.num }</td>
+				<th class="col-2 table-success">Reg. Date</th>
+				<td class="col-4">${ cont.regdate }</td>
 			</tr>
 			<tr>
 				<th class="table-success">ID</th><td>${ cont.memid }</td>
