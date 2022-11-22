@@ -35,4 +35,19 @@
 		update member10 set age = #{age}, mileage = #{mileage}, job = #{job}, 
 		addr = #{addr} where num = #{num}
 	</update>
+	<delete id="del" parameterType="int">
+		delete from member10 where num = #{num}
+	</delete>
+	
+	<!-- 
+		형식) <![CDATA[쿼리문]]>
+		쿼리문 작성 시 조건식 기호(>, <, &)를 사용해야 하는데 XML에서는 이러한 기호들을 
+		쿼리문의 조건식 기호로 인식하는 것이 아니라 태그로 인식하는 경우 발생
+		이런 경우 에러 발생할 수 있음
+		따라서 조건식 기호들을 단순한 문자열로 인식 시켜주어야 함	
+	 -->
+	
+	<update id="seq">
+		<![CDATA[update member10 set num = num - 1 where num > #{ num }]]>
+	</update>
 </mapper>

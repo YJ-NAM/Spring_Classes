@@ -70,5 +70,22 @@ public class MemberController {
 			out.println("<script> alert('Member modification failed.'); history.back(); </script>");
 		}
 	}
+	
+	@RequestMapping("member_delete.do")
+	public void delete(@RequestParam("num") int no, @RequestParam("db_pwd") String db_pwd, @RequestParam("pwd") String pwd, HttpServletResponse response) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		if(db_pwd.equals(pwd)) {
+			int check = this.dao.deleteMember(no);
+			this.dao.updatSeq(no);			
+			if(check > 0) {
+				out.println("<script> alert('Succesfully member deleted.'); location.href='member_list.do'; </script>");
+			}else {
+				out.println("<script> alert('Member deletion failed.'); history.back(); </script>");
+			}
+		}else {
+			out.println("<script> alert('Invalid password'); history.back(); </script>");
+		}
+	}
 
 }

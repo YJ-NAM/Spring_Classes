@@ -34,14 +34,13 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public int deleteMember(int num) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.sqlSession.delete("del", num);
+		
 	}
 
 	@Override
 	public void updatSeq(int num) {
-		// TODO Auto-generated method stub
-		
+		this.sqlSession.update("seq", num);
 	}
 
 	@Override

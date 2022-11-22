@@ -50,12 +50,35 @@
 				<td colspan="4">
 					<c:if test="${ not empty cont }">
 					<button type="button" class="btn btn-success" onclick="location.href='member_modify.do?num=${ cont.num }'">Modify</button>
-					<button type="button" class="btn btn-danger" onclick="location.href='member_delete.do?num=${ cont.num }'">Delete</button>
+					<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteFunction">Delete</button>
 					</c:if>	
 					<button type="button" class="btn btn-secondary" onclick="location.href='member_list.do'">List</button>
 				</td>
 			</tr>	
 		</table>
+		
+		<!-- password 체크 : Modal -->
+		<form action="${ pageContext.request.contextPath }/member_delete.do?num=${ cont.num }" method="post" >
+		<input type="hidden" name="db_pwd" value="${ cont.pwd }" />
+		<div class="modal fade" id="deleteFunction" tabindex="-1" aria-labelledby="deleteFunctionLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h1 class="modal-title fs-5" id="deleteFunctionLabel">Enter your Password</h1>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		       Password <input type="password" name="pwd" class="form-control d-inline w-50"/>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+		        <button type="reset" class="btn btn-warning btn-sm" >Rewrite</button>
+		        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		</form>
 	</div>
 </body>
 </html>
