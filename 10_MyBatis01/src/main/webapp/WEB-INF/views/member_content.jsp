@@ -63,7 +63,7 @@
 		<form action="${ pageContext.request.contextPath }/member_delete.do?num=${ cont.num }" method="post" >
 		<input type="hidden" name="db_pwd" value="${ cont.pwd }" />
 		<div class="modal fade" id="deleteFunction" tabindex="-1" aria-labelledby="deleteFunctionLabel" aria-hidden="true">
-		  <div class="modal-dialog">
+		  <div class="modal-dialog modal-dialog-centered">
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <h1 class="modal-title fs-5" id="deleteFunctionLabel">Enter your Password</h1>
