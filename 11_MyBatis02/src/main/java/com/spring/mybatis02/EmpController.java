@@ -17,7 +17,7 @@ import com.spring.model.EmpDAO;
 import com.spring.model.EmpDTO;
 
 @Controller
-public class EmpController  {
+public class EmpController {
 	
     @Inject
     private EmpDAO dao;
@@ -106,5 +106,13 @@ public class EmpController  {
     	}else {
     		out.println("<script>alert('Deletion failed'); history.back(); </script>");
     	}
+    }
+    
+    @RequestMapping("/empno_check.do")
+    public int empCheck(@RequestParam("empno") String empno) {
+    	int empnoInt = Integer.parseInt(empno);
+    	System.out.println(empnoInt);
+    	int check = this.dao.noCheck(empnoInt);
+		return check;
     }
 }

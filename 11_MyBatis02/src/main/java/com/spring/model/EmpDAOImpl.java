@@ -63,4 +63,9 @@ public class EmpDAOImpl implements EmpDAO {
 		return this.sqlSession.selectOne("mgrName", mgrNo);
 	}
 
+	@Override
+	public int noCheck(int empno) {		
+		return this.sqlSession.selectOne("empnoCheck", empno);
+	}
+
 }

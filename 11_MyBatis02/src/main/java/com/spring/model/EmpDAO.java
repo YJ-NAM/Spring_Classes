@@ -14,5 +14,6 @@ public interface EmpDAO {
 	String getMgrList(int mgrNo);
 	List<String> getJobList();
 	List<EmpDTO> getSearchList(String field, String keyword);
+	int noCheck(int empno);
 
 }

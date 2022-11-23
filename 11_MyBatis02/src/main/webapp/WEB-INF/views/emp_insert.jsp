@@ -33,10 +33,31 @@
 <script>
 	
 	$(function() {
+        $("#msg").hide();	                    
 		$("input[name='empno']").on("keyup", function() {
+			let empNo = $(this).val().trim();
+			console.log(empNo);
 			
-		})
-
+	        $.ajax({
+	        	contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+	            type : "post",
+	            url : "${pageContext.request.contextPath}/empno_check.do",
+	            data : { empno : empNo },
+	            dataType: 'json',
+	            success : function(data) {
+	                console.log(data);
+	                if(data > 0){
+	                    $("#msg").html("There is a same number. Please choose another number.");
+	                }else{	                   
+	                	$("#msg").hide();	                    
+	                }
+	            },
+	            error : function(e){
+	            	console.log(empNo);
+	                alert("Error : " + e.status);
+	            }
+	        });
+		});
 	});
 
 </script> 
@@ -60,7 +81,9 @@
 		<th>No</th>
 		<td>
 		<input type="text" name="empno" class="form-control" ${ required } ${ disabled } value="${ modify.empno }"/>
-		<span id="msg" class="text-left">중복확인 메세지</span>
+			<c:if test="${ empty modify }">
+			<div class="d-flex align-middle"><span id="msg" class="text-left">중복확인 메세지</span></div>
+			</c:if>		
 		</td>
 		</tr>
 		<tr><th>Name</th><td><input type="text" name="ename" class="form-control" ${ required } ${ disabled } value="${ modify.ename }"/></td></tr>
