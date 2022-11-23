@@ -5,6 +5,9 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
 
+	<!-- 이렇게 적는 대신 @Component를 적어서 빈으로 등록해줌 
+	대신 context:component-scan 설정 필요함
+	-->
 	<bean id="boy" class="com.spring.aop02.Boy" />
 	<bean id="girl" class="com.spring.aop02.Girl" />
 	<bean id="myaspect" class="com.spring.aop02.MyAspect" />

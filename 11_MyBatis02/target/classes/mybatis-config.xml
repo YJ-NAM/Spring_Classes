@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+	DTD(Document Type Definition)
+	- 작성한 문서가 어떤 문서인지에 대해서 정의해 놓은 것
+	- 하나의 시스템 내에서 사용할 XML 데이터의 구조를 정의하여 유효성 점검 시 사용하는 태그	
+ -->
+
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.spring.model.EmpDAO" alias="empdao"/>
+		<typeAlias type="com.spring.model.EmpDTO" alias="empdto"/>
+		<typeAlias type="com.spring.model.DeptDTO" alias="deptdto"/>
+	</typeAliases>
+</configuration>

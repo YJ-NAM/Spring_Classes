@@ -1,0 +1,19 @@
+.wrap {
+	width: 100%;
+	max-width: 800px;
+	font-family: 'Poppins', sans-serif;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.wrap h3 {
+	margin-bottom: 0em !important;
+}
+
+.wrap a {
+	text-decoration: none;
+}
+
+.search {
+	display: inline-block;
+}
