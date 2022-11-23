@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.model.DeptDTO;
 import com.spring.model.EmpDAO;
@@ -108,11 +109,10 @@ public class EmpController {
     	}
     }
     
-    @RequestMapping("/empno_check.do")
-    public int empCheck(@RequestParam("empno") String empno) {
+    @RequestMapping("empno_check.do")
+    public @ResponseBody int empCheck(@RequestParam("empno") String empno) throws IOException {
+    	System.out.println(empno);
     	int empnoInt = Integer.parseInt(empno);
-    	System.out.println(empnoInt);
-    	int check = this.dao.noCheck(empnoInt);
-		return check;
+    	return this.dao.noCheck(empnoInt);
     }
 }

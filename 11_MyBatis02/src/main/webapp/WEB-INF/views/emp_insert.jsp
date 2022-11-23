@@ -10,6 +10,7 @@
 	<c:set var="disabled" value="disabled='disabled'" />
 	<c:set var="page" value="emp_modify_ok.do" />
 	<c:set var="word" value="Modify" />
+	<c:set var="autofocus" value="" />
 </c:if>
 <!-- 생성 -->
 <c:if test="${ empty modify }" >
@@ -17,6 +18,7 @@
 	<c:set var="disabled" value="" />
 	<c:set var="page" value="emp_insert_ok.do" />
 	<c:set var="word" value="Register" />
+	<c:set var="autofocus" value="autofocus" />
 </c:if>
 <!DOCTYPE html>
 <html>
@@ -33,30 +35,40 @@
 <script>
 	
 	$(function() {
-        $("#msg").hide();	                    
 		$("input[name='empno']").on("keyup", function() {
+			// 숫자만 입력 되도록 처리 할 것
 			let empNo = $(this).val().trim();
-			console.log(empNo);
-			
-	        $.ajax({
-	        	contentType : "application/x-www-form-urlencoded;charset=UTF-8",
-	            type : "post",
-	            url : "${pageContext.request.contextPath}/empno_check.do",
-	            data : { empno : empNo },
-	            dataType: 'json',
-	            success : function(data) {
-	                console.log(data);
-	                if(data > 0){
-	                    $("#msg").html("There is a same number. Please choose another number.");
-	                }else{	                   
-	                	$("#msg").hide();	                    
-	                }
-	            },
-	            error : function(e){
-	            	console.log(empNo);
-	                alert("Error : " + e.status);
-	            }
-	        });
+			let pattern = /^\d{4}$/;
+			if(empNo != "") {
+				$("#msg").show().html("Enter a 4-digit number.");	                    
+		        $.ajax({
+		        	contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+		            type : "POST",
+		            url : "empno_check.do",
+		            data : { empno : empNo },
+		            dataType: 'text',
+		            success : function(data) {
+		                console.log(data);
+		                if(data > 0){
+		                    $("#msg").show().html("This number is already in use.");
+		                }else{	             
+		                    if(!pattern.test(empNo)) {
+		                    	console.log("여기"+empNo);
+		                    	console.log(!pattern.test(empNo));
+			                	$("#msg").show().html("Enter a 4-digit number.");
+		                    }else {
+		                    	console.log("here"+empNo);
+			                	$("#msg").hide();
+		                    }
+		                }
+		            },
+		            error : function(e){
+		            	console.log(empNo);
+		                alert("Error : " + e.status);
+		            }
+		        });
+			}
+            console.log(empNo);
 		});
 	});
 
@@ -78,11 +90,13 @@
 		<input type="hidden" value="${ modify.empno }" name="empno" />
 		<table class="table table-bordered align-middle">
 		<tr>
-		<th>No</th>
-		<td>
-		<input type="text" name="empno" class="form-control" ${ required } ${ disabled } value="${ modify.empno }"/>
+		<th class="col-3">No</th>
+		<td class="col-9">
+		<input type="text" name="empno" class="form-control" ${ required } ${ disabled } ${ autofocus } value="${ modify.empno }"/>
 			<c:if test="${ empty modify }">
-			<div class="d-flex align-middle"><span id="msg" class="text-left">중복확인 메세지</span></div>
+			<div class="d-flex align-middle">
+				<span id="msg" class="text-left">Only numbers can be entered.</span>
+			</div>
 			</c:if>		
 		</td>
 		</tr>
