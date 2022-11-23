@@ -109,10 +109,13 @@ public class EmpController {
     	}
     }
     
+    // @ResponseBody 데이터 자체를 리턴 => json 형식으로 return 됨
     @RequestMapping("empno_check.do")
     public @ResponseBody int empCheck(@RequestParam("empno") String empno) throws IOException {
-    	System.out.println(empno);
-    	int empnoInt = Integer.parseInt(empno);
-    	return this.dao.noCheck(empnoInt);
+    	int empInt = 0;
+    	if(!empno.isBlank()) {
+    		empInt = Integer.parseInt(empno);
+    	}
+    	return this.dao.noCheck(empInt);
     }
 }

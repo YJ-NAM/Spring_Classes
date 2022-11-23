@@ -36,7 +36,6 @@
 	
 	$(function() {
 		$("input[name='empno']").on("keyup", function() {
-			// 숫자만 입력 되도록 처리 할 것
 			let empNo = $(this).val().trim();
 			let pattern = /^\d{4}$/;
 			if(empNo != "") {
@@ -68,6 +67,7 @@
 		            }
 		        });
 			}
+			console.log(typeof empNo);
             console.log(empNo);
 		});
 	});
