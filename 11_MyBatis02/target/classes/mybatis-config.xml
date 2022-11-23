@@ -14,5 +14,6 @@
 	<typeAliases>
 		<typeAlias type="com.spring.model.EmpDAO" alias="empdao"/>
 		<typeAlias type="com.spring.model.EmpDTO" alias="empdto"/>
+		<typeAlias type="com.spring.model.DeptDTO" alias="deptdto"/>
 	</typeAliases>
 </configuration>

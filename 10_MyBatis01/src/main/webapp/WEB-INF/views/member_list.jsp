@@ -91,10 +91,10 @@
 		<div class="search d-inline">
 			<form action="${ pageContext.request.contextPath }/member_search.do" method="post">
 				<select name="field" class="form-select d-inline w-25" >
-					<option value="allSearch"<c:if test="${ field eq 'allSearch' }">checked='checked'</c:if>>전체</option>
-					<option value="id"<c:if test="${ field eq 'id' }">checked='checked'</c:if>>아이디</option>
-					<option value="name"<c:if test="${ field eq 'name' }">checked='checked'</c:if>>이름</option>
-					<option value="job"<c:if test="${ field eq 'job' }">checked='checked'</c:if>>직업</option>
+					<option value="allSearch"<c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>
+					<option value="id"<c:if test="${ field eq 'id' }">selected="selected"</c:if>>아이디</option>
+					<option value="name"<c:if test="${ field eq 'name' }">selected="selected"</c:if>>이름</option>
+					<option value="job"<c:if test="${ field eq 'job' }">selected="selected"</c:if>>직업</option>
 				</select>
 				<input type="text" name="keyword" value="${ keyword }" class="form-control d-inline w-50" />
 				<button class="btn btn-secondary" type="submit">Search</button>

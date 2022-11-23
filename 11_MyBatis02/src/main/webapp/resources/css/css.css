@@ -8,7 +8,6 @@ body {
 	font-family: 'Poppins', sans-serif;
 	text-align: center;
 	margin: 0 auto;
-	
 }
 
 .wrap .title_container {
@@ -16,7 +15,8 @@ body {
 }
 
 .wrap h3 {
-	
+	margin-bottom: 0px !important;
+	margin-top: 10px;
 }
 
 .wrap .table-bordered th {

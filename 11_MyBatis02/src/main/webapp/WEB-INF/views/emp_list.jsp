@@ -38,11 +38,16 @@
 		</c:if>
 		<c:if test="${ empty list }">
 			<tr>
-				<td>No data</td>
+				<td colspan="5">No data</td>
 			</tr>
 		</c:if>
 		<tr>
-			<td colspan="5"><button class="btn btn-secondary" onclick="location.href='emp_insert.do';">Register</button></td>
+			<td colspan="5">
+			<button class="btn btn-secondary" onclick="location.href='emp_insert.do';">Register</button>
+			<c:if test="${ not empty keyword }">
+			<button class="btn btn-outline-secondary" onclick="location.href='emp_list.do';">List</button>
+			</c:if>
+			</td>
 		</tr>
 		</table>
 		
@@ -50,12 +55,12 @@
 		<div class="d-inline">
 			<form method="get" action="${ pageContext.request.contextPath }/emp_search.do?field=${ field }&${ keyword }">
 				<select name="field" class="form-select d-inline w-25">
-					<option value="allSearch"<c:if test=${ field eq 'allSearch' }>selected="selected"</c:if>>All</option>
-					<option value="name"<c:if test=${ field eq 'name' }>selected="selected"</c:if>>Name</option>
-					<option value="no"<c:if test=${ field eq 'no' }>selected="selected"</c:if>>No</option>
-					<option value="job"<c:if test=${ field eq 'job' }>selected="selected"</c:if>>Job</option>
-					<option value="dept"<c:if test=${ field eq 'dept' }>selected="selected"</c:if>>Department</option>
-				</select>
+					<option value="allSearch"<c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>All</option>
+					<option value="name"<c:if test="${ field eq 'name' }">selected="selected"</c:if>>Name</option>
+					<option value="no"<c:if test="${ field eq 'no' }">selected="selected"</c:if>>No</option> 
+					<option value="job"<c:if test="${ field eq 'job' }">selected="selected"</c:if>>Job</option>
+					<option value="dept"<c:if test="${ field eq 'dept' }">selected="selected"</c:if>>Department</option>
+				</select> 
 				<input type="text" name="keyword" class="form-control d-inline w-50" />
 				<button type="submit" class="btn btn-secondary" >Search</button>
 			</form>

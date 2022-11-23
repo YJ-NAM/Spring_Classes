@@ -14,5 +14,39 @@
 	<select id="list" resultType="empdto">
 		select e.*, d.deptno, d.dname from emp e join dept d on e.deptno = d.deptno order by hiredate desc
 	</select>
-
+	<!-- insertForm -->
+	<select id="jobList" resultType="String">
+		select distinct(job) from emp order by job
+	</select>
+	<select id="mgrList" resultType="empdto">
+		select * from emp where empno in (select distinct(mgr) from emp)
+	</select>
+	<select id="deptList" resultType="deptdto">
+		select * from dept order by deptno
+	</select>
+	<!-- search -->
+	<select id="allSearch" resultType="empdto">
+		select e.*, d.deptno, d.dname from emp e join dept d on e.deptno = d.deptno where ename like '%'||#{keyword}||'%' or empno like '%'||#{keyword}||'%' or job like '%'||#{keyword}||'%' or d.dname like '%'||#{keyword}||'%' or d.deptno like '%'||#{keyword}||'%' order by e.deptno desc
+	</select>
+	<select id="name" parameterType="String" resultType="empdto">
+		select e.*, d.deptno, d.dname from emp e join dept d on e.deptno = d.deptno where ename like '%'||#{keyword}||'%' order by e.deptno desc
+	</select>
+	<select id="no" parameterType="String" resultType="empdto">
+		select e.*, d.deptno, d.dname from emp e join dept d on e.deptno = d.deptno where empno like '%'||#{keyword}||'%' order by e.deptno desc
+	</select>
+	<select id="job" parameterType="String" resultType="empdto">
+		select e.*, d.deptno, d.dname from emp e join dept d on e.deptno = d.deptno where job like '%'||#{keyword}||'%' order by e.deptno desc
+	</select>
+	<select id="dept" parameterType="String" resultType="empdto">
+		select e.*, d.deptno, d.dname from emp e join dept d on e.deptno = d.deptno where d.dname like '%'||#{keyword}||'%' or d.deptno like '%'||#{keyword}||'%' order by e.deptno desc
+	</select>
+	<!-- insert  -->
+	<insert id="add" parameterType="empdto">
+		insert into emp values (#{empno}, #{ename}, #{job}, #{mgr}, sysdate, #{sal}, #{comm}, #{deptno})
+	</insert>
+	<!-- 
+		PreparedStatement에 들어가는 파라미터를 사용할 때는 #{ } 기호를 이용하여 처리함
+		예를 들면 #{empno} 이 기호는 parmeterType="dto" 객체에서 empno 컬럼명에 있는 값을 가져오는 
+		getter() 메서드를 사용하는 것과 같은 의미임
+	 -->
 </mapper>

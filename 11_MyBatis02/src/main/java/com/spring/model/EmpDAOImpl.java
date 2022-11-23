@@ -20,8 +20,7 @@ public class EmpDAOImpl implements EmpDAO {
 
 	@Override
 	public int insertEmp(EmpDTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.sqlSession.insert("add", dto);
 	}
 
 	@Override
@@ -44,20 +43,22 @@ public class EmpDAOImpl implements EmpDAO {
 
 	@Override
 	public List<DeptDTO> getDeptList() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.sqlSession.selectList("deptList");
 	}
 
 	@Override
 	public List<EmpDTO> getMgrList() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.sqlSession.selectList("mgrList");
 	}
 
 	@Override
 	public List<String> getJobList() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.sqlSession.selectList("jobList");
+	}
+
+	@Override
+	public List<EmpDTO> getSearchList(String field, String keyword) {
+		return this.sqlSession.selectList(field, keyword);
 	}
 
 }
