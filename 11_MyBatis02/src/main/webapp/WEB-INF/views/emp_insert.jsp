@@ -4,7 +4,20 @@
 <c:set var="jlist" value="${ jList }" />
 <c:set var="mlist" value="${ mList }" />
 <c:set var="dlist" value="${ dList }" />
-<c:set var="modify" value="${ modify }" />
+<!-- 수정 -->
+<c:if test="${ !empty modify }" > 
+	<c:set var="required" value="" />
+	<c:set var="disabled" value="disabled='disabled'" />
+	<c:set var="page" value="emp_modify_ok.do?empno=${ modify.empno }" />
+	<c:set var="word" value="Modify" />
+</c:if>
+<!-- 생성 -->
+<c:if test="${ empty modify }" >
+	<c:set var="required" value="required='required'" />
+	<c:set var="disabled" value="" />
+	<c:set var="page" value="emp_insert_ok.do" />
+	<c:set var="word" value="Register" />
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,15 +34,18 @@
 	<div class="wrap">
 		<br />
 		<div class="title_container py-3">
-			<c:if test="">
+			<c:if test="${ empty modify }">
 			<h3>Register new Employee</h3>
+			</c:if>
+			<c:if test="${ !empty modify }">
+			<h3>Modify ${ modify.ename }</h3>
 			</c:if>
 		</div>
 		<br />
-		<form action="${ pageContext.request.contextPath }/emp_insert_ok.do" method="post">
+		<form action="${ pageContext.request.contextPath }/${ page }" method="post">
 		<table class="table table-bordered align-middle">
-		<tr><th>No</th><td><input type="text" name="empno" class="form-control" /></td></tr>
-		<tr><th>Name</th><td><input type="text" name="ename" class="form-control" /></td></tr>
+		<tr><th>No</th><td><input type="text" name="empno" class="form-control" ${ required } ${ disabled } value="${ modify.empno }"/></td></tr>
+		<tr><th>Name</th><td><input type="text" name="ename" class="form-control" ${ required } ${ disabled } value="${ modify.ename }"/></td></tr>
 		<tr><th>Job</th>
 			<td>
 				<select name="job" class="form-select">
@@ -38,7 +54,7 @@
 					</c:if>
 					<c:if test="${ not empty jlist }">
 						<c:forEach items="${ jlist }" var="job">
-						<option value="${ job }">${ job }</option>
+						<option value="${ job }"<c:if test="${ job eq modify.job }">selected="selected"</c:if>>${ job }</option>
 						</c:forEach>
 					</c:if>
 				</select>
@@ -52,14 +68,14 @@
 					</c:if>
 					<c:if test="${ not empty mlist }">
 						<c:forEach items="${ mlist }" var="mgr">
-						<option value="${ mgr.empno }">${ mgr.ename }[${ mgr.empno }]</option>
+						<option value="${ mgr.empno }"<c:if test="${ mgr.empno eq modify.mgr }">selected="selected"</c:if>>${ mgr.ename }[${ mgr.empno }]</option>
 						</c:forEach>
 					</c:if>
 				</select>
 			</td>
 		</tr>
-		<tr><th>Salary</th><td><input type="text" name="sal" class="form-control" /></td></tr>
-		<tr><th>Bonus</th><td><input type="text" name="comm" class="form-control" /></td></tr>
+		<tr><th>Salary</th><td><input type="text" name="sal" class="form-control" value="${ modify.sal }" /></td></tr>
+		<tr><th>Bonus</th><td><input type="text" name="comm" class="form-control" value="${ modify.comm }" /></td></tr>
 		<tr><th>Department</th>
 			<td>
 				<select name="deptno" class="form-select">
@@ -68,7 +84,7 @@
 					</c:if>
 					<c:if test="${ not empty dlist }">
 						<c:forEach items="${ dlist }" var="dept">
-						<option value="${ dept.deptno }">${ dept.dname }[${ dept.deptno }]</option>
+						<option value="${ dept.deptno }"<c:if test="${ dept.deptno eq modify.deptno }">selected="selected"</c:if>>${ dept.dname }[${ dept.deptno }]</option>
 						</c:forEach>
 					</c:if>
 				</select>
@@ -76,7 +92,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				<input type="submit" value="Register" class="btn btn-outline-success"/>
+				<input type="submit" value="${ word }" class="btn btn-outline-success"/>
 				<input type="reset" value="Rewrite" class="btn btn-outline-warning"/>
 				<input type="button" value="List" class="btn btn-outline-secondary" onclick="location.href='emp_list.do'"/>
 			</td>

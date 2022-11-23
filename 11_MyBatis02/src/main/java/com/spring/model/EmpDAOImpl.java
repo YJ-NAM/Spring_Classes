@@ -30,8 +30,7 @@ public class EmpDAOImpl implements EmpDAO {
 
 	@Override
 	public int updateEmp(EmpDTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.sqlSession.update("modify", dto);
 	}
 
 	@Override

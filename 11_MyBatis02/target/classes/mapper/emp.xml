@@ -55,5 +55,7 @@
 	<select id="mgrName" resultType="String">
 		select ename from emp where empno = #{mgrNo}
 	</select>
-	
+	<update id="modify" parameterType="empdto">
+		update emp set job = #{job}, mgr = #{mgr}, sal = #{sal}, comm = #{comm}, deptno = #{deptno} where empno = #{empno}
+	</update>
 </mapper>

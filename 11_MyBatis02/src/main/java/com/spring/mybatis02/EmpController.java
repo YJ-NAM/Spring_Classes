@@ -56,9 +56,9 @@ public class EmpController  {
     	response.setContentType("text/html; charset=UTF-8");
     	PrintWriter out = response.getWriter();
     	if(check > 0) {
-    		out.println("<script>alert('Successfully registrated'); location.href='emp_list.do'; </script>");
+    		out.println("<script>alert('Successfully registrated'); location.href='emp_content.do?empno="+dto.getEmpno()+"'; </script>");
     	}else {
-    		out.println("<script>alert('Resgistration failed'); history.back(); </script>");
+    		out.println("<script>alert('Registration failed'); history.back(); </script>");
     	}
     }
     
@@ -74,7 +74,25 @@ public class EmpController  {
     @RequestMapping("emp_modify.do")
     public String modify(@RequestParam("empno") int empno, Model model) {
     	EmpDTO content = this.dao.getEmp(empno);
+    	List<String> jobList = this.dao.getJobList();
+    	List<EmpDTO> mgrList = this.dao.getMgrList();
+    	List<DeptDTO> deptList = this.dao.getDeptList();
     	model.addAttribute("modify", content);
+    	model.addAttribute("jList", jobList);
+    	model.addAttribute("mList", mgrList);
+    	model.addAttribute("dList", deptList);
     	return "emp_insert";
+    }
+    
+    @RequestMapping("emp_modify_ok.do")
+    public void modifyOk(EmpDTO dto, HttpServletResponse response) throws IOException {
+    	int check = this.dao.updateEmp(dto);
+    	response.setContentType("text/html; charset=UTF-8");
+    	PrintWriter out = response.getWriter();
+    	if(check > 0) {
+    		out.println("<script>alert('Successfully modified'); location.href='emp_content.do?empno="+dto.getEmpno()+"'; </script>");
+    	}else {
+    		out.println("<script>alert('Modification failed'); history.back(); </script>");
+    	}
     }
 }
