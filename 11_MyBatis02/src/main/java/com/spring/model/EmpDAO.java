@@ -11,6 +11,7 @@ public interface EmpDAO {
 	int deleteEmp(int empno);
 	List<DeptDTO> getDeptList();
 	List<EmpDTO> getMgrList();
+	String getMgrList(int mgrNo);
 	List<String> getJobList();
 	List<EmpDTO> getSearchList(String field, String keyword);
 

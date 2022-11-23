@@ -4,6 +4,7 @@
 <c:set var="jlist" value="${ jList }" />
 <c:set var="mlist" value="${ mList }" />
 <c:set var="dlist" value="${ dList }" />
+<c:set var="modify" value="${ modify }" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,9 @@
 	<div class="wrap">
 		<br />
 		<div class="title_container py-3">
+			<c:if test="">
 			<h3>Register new Employee</h3>
+			</c:if>
 		</div>
 		<br />
 		<form action="${ pageContext.request.contextPath }/emp_insert_ok.do" method="post">

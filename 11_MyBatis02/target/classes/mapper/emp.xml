@@ -26,19 +26,19 @@
 	</select>
 	<!-- search -->
 	<select id="allSearch" resultType="empdto">
-		select e.*, d.deptno, d.dname from emp e join dept d on e.deptno = d.deptno where ename like '%'||#{keyword}||'%' or empno like '%'||#{keyword}||'%' or job like '%'||#{keyword}||'%' or d.dname like '%'||#{keyword}||'%' or d.deptno like '%'||#{keyword}||'%' order by e.deptno desc
+		select e.*, d.deptno, d.dname from emp e join dept d on e.deptno = d.deptno where lower(ename) like lower('%'||#{keyword}||'%') or empno like '%'||#{keyword}||'%' or lower(job) like lower('%'||#{keyword}||'%') or lower(d.dname) like lower('%'||#{keyword}||'%') or d.deptno like '%'||#{keyword}||'%' order by e.deptno desc
 	</select>
 	<select id="name" parameterType="String" resultType="empdto">
-		select e.*, d.deptno, d.dname from emp e join dept d on e.deptno = d.deptno where ename like '%'||#{keyword}||'%' order by e.deptno desc
+		select e.*, d.deptno, d.dname from emp e join dept d on e.deptno = d.deptno where lower(ename) like lower('%'||#{keyword}||'%') order by e.deptno desc
 	</select>
 	<select id="no" parameterType="String" resultType="empdto">
 		select e.*, d.deptno, d.dname from emp e join dept d on e.deptno = d.deptno where empno like '%'||#{keyword}||'%' order by e.deptno desc
 	</select>
 	<select id="job" parameterType="String" resultType="empdto">
-		select e.*, d.deptno, d.dname from emp e join dept d on e.deptno = d.deptno where job like '%'||#{keyword}||'%' order by e.deptno desc
+		select e.*, d.deptno, d.dname from emp e join dept d on e.deptno = d.deptno where lower(job) like lower('%'||#{keyword}||'%') order by e.deptno desc
 	</select>
 	<select id="dept" parameterType="String" resultType="empdto">
-		select e.*, d.deptno, d.dname from emp e join dept d on e.deptno = d.deptno where d.dname like '%'||#{keyword}||'%' or d.deptno like '%'||#{keyword}||'%' order by e.deptno desc
+		select e.*, d.deptno, d.dname from emp e join dept d on e.deptno = d.deptno where lower(d.dname) like lower('%'||#{keyword}||'%') or d.deptno like '%'||#{keyword}||'%' order by e.deptno desc
 	</select>
 	<!-- insert  -->
 	<insert id="add" parameterType="empdto">
@@ -49,4 +49,11 @@
 		예를 들면 #{empno} 이 기호는 parmeterType="dto" 객체에서 empno 컬럼명에 있는 값을 가져오는 
 		getter() 메서드를 사용하는 것과 같은 의미임
 	 -->
+	<select id="content" parameterType="int" resultType="empdto">
+	 	select e.*, d.deptno, d.dname from emp e join dept d on e.deptno = d.deptno where e.empno = #{empno} order by hiredate desc
+	</select>
+	<select id="mgrName" resultType="String">
+		select ename from emp where empno = #{mgrNo}
+	</select>
+	
 </mapper>

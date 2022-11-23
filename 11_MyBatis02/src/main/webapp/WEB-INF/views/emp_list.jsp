@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="list" value="${ list }" />
 <!DOCTYPE html>
 <html>
@@ -30,8 +31,8 @@
 			<tr>
 				<td class="col-2">${ dto.empno }</td>
 				<td class="col-3"><a href="${ pageContext.request.contextPath }/emp_content.do?empno=${dto.empno}">${ dto.ename }</a></td>
-				<td class="col-2">${ dto.job }</td>
-				<td class="col-3">${ dto.dname }</td>
+				<td class="col-2">${ fn:toUpperCase(dto.job.substring(0,1)) }${ fn:toLowerCase(dto.job.substring(1)) }</td>
+				<td class="col-3">${ fn:toUpperCase(dto.dname.substring(0,1)) }${ fn:toLowerCase(dto.dname.substring(1)) }</td>
 				<td class="col-2">${ dto.hiredate.substring(0,10) }</td>
 			</tr>
 			</c:forEach>
@@ -50,7 +51,7 @@
 			</td>
 		</tr>
 		</table>
-		
+		<br />
 		<!-- Search -->
 		<div class="d-inline">
 			<form method="get" action="${ pageContext.request.contextPath }/emp_search.do?field=${ field }&${ keyword }">
@@ -65,7 +66,8 @@
 				<button type="submit" class="btn btn-secondary" >Search</button>
 			</form>
 		</div>
-		
+		<br />	
+		<br />
 	</div>
 </body>
 </html>

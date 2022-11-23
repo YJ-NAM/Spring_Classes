@@ -56,9 +56,25 @@ public class EmpController  {
     	response.setContentType("text/html; charset=UTF-8");
     	PrintWriter out = response.getWriter();
     	if(check > 0) {
-    		out.println("<script>alert('Resgistration successed'); location.href='emp_list.do'; </script>");
+    		out.println("<script>alert('Successfully registrated'); location.href='emp_list.do'; </script>");
     	}else {
     		out.println("<script>alert('Resgistration failed'); history.back(); </script>");
     	}
+    }
+    
+    @RequestMapping("emp_content.do")
+    public String content(@RequestParam("empno") int empno, Model model) {
+    	EmpDTO content = this.dao.getEmp(empno);
+    	String mgrName = this.dao.getMgrList(content.getMgr());
+    	model.addAttribute("cont", content);
+    	model.addAttribute("mgrName", mgrName);
+    	return "emp_content";
+    }
+    
+    @RequestMapping("emp_modify.do")
+    public String modify(@RequestParam("empno") int empno, Model model) {
+    	EmpDTO content = this.dao.getEmp(empno);
+    	model.addAttribute("modify", content);
+    	return "emp_insert";
     }
 }

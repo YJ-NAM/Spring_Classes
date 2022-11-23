@@ -16,11 +16,14 @@ body {
 
 .wrap h3 {
 	margin-bottom: 0px !important;
-	margin-top: 10px;
 }
 
 .wrap .table-bordered th {
 	background-color: #f0e4e4;
+}
+
+.wrap .table-bordered tr td .subtitle {
+	font-weight: bolder;	
 }
 
 .wrap a {

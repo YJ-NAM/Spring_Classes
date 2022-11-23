@@ -25,8 +25,7 @@ public class EmpDAOImpl implements EmpDAO {
 
 	@Override
 	public EmpDTO getEmp(int empno) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.sqlSession.selectOne("content", empno);
 	}
 
 	@Override
@@ -59,6 +58,11 @@ public class EmpDAOImpl implements EmpDAO {
 	@Override
 	public List<EmpDTO> getSearchList(String field, String keyword) {
 		return this.sqlSession.selectList(field, keyword);
+	}
+
+	@Override
+	public String getMgrList(int mgrNo) {
+		return this.sqlSession.selectOne("mgrName", mgrNo);
 	}
 
 }
