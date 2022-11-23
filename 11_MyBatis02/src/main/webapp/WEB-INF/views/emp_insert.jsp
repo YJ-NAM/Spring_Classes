@@ -8,7 +8,7 @@
 <c:if test="${ !empty modify }" > 
 	<c:set var="required" value="" />
 	<c:set var="disabled" value="disabled='disabled'" />
-	<c:set var="page" value="emp_modify_ok.do?empno=${ modify.empno }" />
+	<c:set var="page" value="emp_modify_ok.do" />
 	<c:set var="word" value="Modify" />
 </c:if>
 <!-- 생성 -->
@@ -29,6 +29,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">	
+<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+<script>
+	
+	$(function() {
+		$("input[name='empno']").on("keyup", function() {
+			
+		})
+
+	});
+
+</script> 
 </head>
 <body>
 	<div class="wrap">
@@ -43,12 +54,19 @@
 		</div>
 		<br />
 		<form action="${ pageContext.request.contextPath }/${ page }" method="post">
+		<input type="hidden" value="${ modify.empno }" name="empno" />
 		<table class="table table-bordered align-middle">
-		<tr><th>No</th><td><input type="text" name="empno" class="form-control" ${ required } ${ disabled } value="${ modify.empno }"/></td></tr>
+		<tr>
+		<th>No</th>
+		<td>
+		<input type="text" name="empno" class="form-control" ${ required } ${ disabled } value="${ modify.empno }"/>
+		<span id="msg" class="text-left">중복확인 메세지</span>
+		</td>
+		</tr>
 		<tr><th>Name</th><td><input type="text" name="ename" class="form-control" ${ required } ${ disabled } value="${ modify.ename }"/></td></tr>
 		<tr><th>Job</th>
 			<td>
-				<select name="job" class="form-select">
+				<select name="job" class="form-select" >
 					<c:if test="${ empty jlist }">
 						<option value="">None</option>
 					</c:if>
@@ -62,7 +80,7 @@
 		</tr>
 		<tr><th>Manager</th>
 			<td>
-				<select name="mgr" class="form-select">
+				<select name="mgr" class="form-select" >
 					<c:if test="${ empty mlist }">
 						<option value="">None</option>
 					</c:if>
@@ -74,11 +92,11 @@
 				</select>
 			</td>
 		</tr>
-		<tr><th>Salary</th><td><input type="text" name="sal" class="form-control" value="${ modify.sal }" /></td></tr>
-		<tr><th>Bonus</th><td><input type="text" name="comm" class="form-control" value="${ modify.comm }" /></td></tr>
+		<tr><th>Salary</th><td><input type="text" name="sal" class="form-control" ${ required } value="${ modify.sal }" /></td></tr>
+		<tr><th>Commission</th><td><input type="text" name="comm" class="form-control" ${ required } value="${ modify.comm }" /></td></tr>
 		<tr><th>Department</th>
 			<td>
-				<select name="deptno" class="form-select">
+				<select name="deptno" class="form-select" >
 					<c:if test="${ empty dlist }">
 						<option value="">None</option>
 					</c:if>

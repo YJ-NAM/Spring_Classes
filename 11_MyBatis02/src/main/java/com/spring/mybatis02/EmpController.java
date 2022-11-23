@@ -95,4 +95,16 @@ public class EmpController  {
     		out.println("<script>alert('Modification failed'); history.back(); </script>");
     	}
     }
+    
+    @RequestMapping("emp_delete.do")
+    public void delete(@RequestParam("empno") int empno, HttpServletResponse response) throws IOException {
+    	int check = this.dao.deleteEmp(empno);
+    	response.setContentType("text/html; charset=UTF-8");
+    	PrintWriter out = response.getWriter();
+    	if(check > 0) {
+    		out.println("<script>alert('Successfully deleted'); location.href='emp_list.do'; </script>");
+    	}else {
+    		out.println("<script>alert('Deletion failed'); history.back(); </script>");
+    	}
+    }
 }

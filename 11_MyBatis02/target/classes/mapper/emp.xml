@@ -52,10 +52,13 @@
 	<select id="content" parameterType="int" resultType="empdto">
 	 	select e.*, d.deptno, d.dname from emp e join dept d on e.deptno = d.deptno where e.empno = #{empno} order by hiredate desc
 	</select>
-	<select id="mgrName" resultType="String">
+	<select id="mgrName" parameterType="int" resultType="String">
 		select ename from emp where empno = #{mgrNo}
 	</select>
 	<update id="modify" parameterType="empdto">
 		update emp set job = #{job}, mgr = #{mgr}, sal = #{sal}, comm = #{comm}, deptno = #{deptno} where empno = #{empno}
 	</update>
+	<delete id="delete" parameterType="int">
+		delete from emp where empno = #{empno}
+	</delete>
 </mapper>

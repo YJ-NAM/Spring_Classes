@@ -36,7 +36,7 @@
 		</tr>
 		<tr>
 			<td><span class="subtitle">Job : </span>${ fn:toUpperCase(dto.job.substring(0,1)) }${ fn:toLowerCase(dto.job.substring(1)) }</td>
-			<td><span class="subtitle">Department : </span>${ fn:toUpperCase(dto.dname.substring(0,1)) }${ fn:toLowerCase(dto.dname.substring(1)) }[ ${ dto.deptno } ]</td>
+			<td><span class="subtitle">Department : </span>${ fn:toUpperCase(dto.dname.substring(0,1)) }${ fn:toLowerCase(dto.dname.substring(1)) } <span class="badge text-bg-secondary">${ dto.deptno }</span></td>
 		</tr>
 		<tr>
 			<td><span class="subtitle">Salary : </span>
@@ -45,7 +45,8 @@
 			<fmt:setLocale value="en-US"/><fmt:formatNumber value="${ dto.comm }" type="currency" currencySymbol="$" />
 		</tr>
 		<tr>
-			<td><span class="subtitle">Manager : </span>${ dto.mgr }[ ${ mgrName } ]</td><td><span class="subtitle">Hiredate : </span>${ dto.hiredate }</td>
+			<td><span class="subtitle">Manager : </span>${ mgrName } <span class="badge text-bg-secondary">${ dto.mgr }</span></td>
+			<td><span class="subtitle">Hiredate : </span>${ dto.hiredate.substring(0,10) }</td>
 		</tr>
 		</c:if>
 		<c:if test="${ empty dto }">
@@ -56,11 +57,30 @@
 		<tr>
 			<td colspan="2">
 			<button class="btn btn-outline-success" onclick="location.href='emp_modify.do?empno=${ dto.empno }';">Modify</button>
-			<button class="btn btn-outline-danger" onclick="location.href='emp_delete.do?empno=${ dto.empno }';">Delete</button>
+			<button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteFunction">Delete</button>
 			<button class="btn btn-outline-secondary" onclick="location.href='emp_list.do';">List</button>
 			</td>
 		</tr>
 		</table>
+		
+		<!-- 삭제 -->
+		<div class="modal fade" id="deleteFunction" tabindex="-1" aria-labelledby="deleteFunctionLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h1 class="modal-title fs-5" id="deleteFunctionLabel">Delete Confirm </h1>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		       	<p class="mb-0">Are you sure you want to wipe all data? <br /> Once it's done, it cannot be undone.</p>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-danger" onclick="location.href='emp_delete.do?empno=${ dto.empno }'">Delete</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 		<br />	
 		<br />
 	</div>
