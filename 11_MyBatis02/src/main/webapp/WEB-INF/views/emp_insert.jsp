@@ -38,6 +38,7 @@
 		$("input[name='empno']").on("keyup", function() {
 			let empNo = $(this).val().trim();
 			let pattern = /^\d{4}$/;
+			console.log(typeof empNo);
 			if(empNo != "") {
 				$("#msg").show().html("Enter a 4-digit number.");	                    
 		        $.ajax({
@@ -71,6 +72,15 @@
             console.log(empNo);
 		});
 	});
+	
+	function validateForm(form) {
+		let empno = $("input[name='empno']").val().trim()
+		if(typeof empno == string) {
+			$("input[name='empno']").val(parseInt(empno));
+			alert(typeof empno);
+			alert(typeof $("input[name='empno']").val());
+		}
+	}
 
 </script> 
 </head>
@@ -86,7 +96,7 @@
 			</c:if>
 		</div>
 		<br />
-		<form action="${ pageContext.request.contextPath }/${ page }" method="post">
+		<form name="empnoForm" action="${ pageContext.request.contextPath }/${ page }" method="post" onsubmit="return validateForm(this);">
 		<input type="hidden" value="${ modify.empno }" name="empno" />
 		<table class="table table-bordered align-middle">
 		<tr>
@@ -147,7 +157,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				<input type="submit" value="${ word }" class="btn btn-outline-success"/>
+				<input type="submit" value="${ word }" class="btn btn-outline-success" />
 				<input type="reset" value="Rewrite" class="btn btn-outline-warning"/>
 				<input type="button" value="List" class="btn btn-outline-secondary" onclick="location.href='emp_list.do'"/>
 			</td>

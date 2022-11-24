@@ -1,0 +1,62 @@
+body {
+	background: hsla(211, 66%, 87%, 1);
+	background: linear-gradient(90deg, hsla(211, 66%, 87%, 1) 0%, hsla(348, 67%, 88%, 1) 50%, hsla(272, 26%, 72%, 1) 100%);
+	background: -moz-linear-gradient(90deg, hsla(211, 66%, 87%, 1) 0%, hsla(348, 67%, 88%, 1) 50%, hsla(272, 26%, 72%, 1) 100%);
+	background: -webkit-linear-gradient(90deg, hsla(211, 66%, 87%, 1) 0%, hsla(348, 67%, 88%, 1) 50%, hsla(272, 26%, 72%, 1) 100%);
+	filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#C9DEF4", endColorstr="#F5CCD4", GradientType=1 );
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.wrap {
+	width: 100%;
+	max-width: 800px;
+	font-family: 'Poppins', sans-serif;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.wrap .subTitle {
+	padding: 1rem;
+}
+
+.wrap .subTitle h3 {
+	margin-bottom: 0px !important;
+}
+
+.wrap .subTitle h3 a {
+	text-decoration: none;
+	color: black;
+}
+
+.wrap .subTitle h3:hover {
+	background: linear-gradient(150deg, black, pink, black);
+	 -webkit-background-clip: text;
+  	-webkit-text-fill-color: transparent;
+}
+
+.wrap .table {
+	background-color: #FFECF0;
+	text-align: center;
+}
+
+.wrap #content_table tr th {
+	background-color: white;
+}
+
+.wrap #content_table tr:nth-child(n+2):nth-child(-n+4) td {
+	padding-left: 2em;
+	padding-right: 2em;
+    text-align: left;
+}
+
+
+.wrap #content_table tr:nth-child(3) td {
+	height: 20em;
+	vertical-align: top;
+}
+
+.wrap a {
+	text-decoration: none;
+}
+

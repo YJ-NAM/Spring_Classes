@@ -6,6 +6,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	
 	<!-- 스프링 작업 시 설정 파일 설정하는 공간 ==> 주로 DB 연동 작업 -->
 	<!-- 1. 외부 properties 파일을 읽어들일 수 있게 설정 작업 -->
 	<!-- 외부의 프로퍼티 파일에 저장된 정보를 스프링 설정 파일에서 사용할 수 있게 하는 태그 -->
