@@ -11,6 +11,7 @@
 	<c:set var="page" value="emp_modify_ok.do" />
 	<c:set var="word" value="Modify" />
 	<c:set var="autofocus" value="" />
+	<c:set var="empno" value="empno" />
 </c:if>
 <!-- 생성 -->
 <c:if test="${ empty modify }" >
@@ -19,6 +20,7 @@
 	<c:set var="page" value="emp_insert_ok.do" />
 	<c:set var="word" value="Register" />
 	<c:set var="autofocus" value="autofocus" />
+	<c:set var="empno" value="" />
 </c:if>
 <!DOCTYPE html>
 <html>
@@ -38,7 +40,6 @@
 		$("input[name='empno']").on("keyup", function() {
 			let empNo = $(this).val().trim();
 			let pattern = /^\d{4}$/;
-			console.log(typeof empNo);
 			if(empNo != "") {
 				$("#msg").show().html("Enter a 4-digit number.");	                    
 		        $.ajax({
@@ -53,35 +54,63 @@
 		                    $("#msg").show().html("This number is already in use.");
 		                }else{	             
 		                    if(!pattern.test(empNo)) {
-		                    	console.log("여기"+empNo);
-		                    	console.log(!pattern.test(empNo));
 			                	$("#msg").show().html("Enter a 4-digit number.");
 		                    }else {
-		                    	console.log("here"+empNo);
 			                	$("#msg").hide();
 		                    }
 		                }
 		            },
 		            error : function(e){
-		            	console.log(empNo);
 		                alert("Error : " + e.status);
 		            }
 		        });
 			}
-			console.log(typeof empNo);
-            console.log(empNo);
 		});
 	});
 	
+	// 유효성 검사
 	function validateForm(form) {
-		let empno = $("input[name='empno']").val().trim()
-		if(typeof empno == string) {
-			$("input[name='empno']").val(parseInt(empno));
-			alert(typeof empno);
-			alert(typeof $("input[name='empno']").val());
+		
+		let empNo = $("input[name='empno']").val().trim();
+		let pattern = /^\d{4}$/;
+		let result = false;
+		
+		// empno 조건검사
+	    if(!pattern.test(empNo)) {
+	        alert("Enter a 4-digit number.");
+	        form.empno.focus();
+	        form.empno.value = "";
+        	$("#msg").hide();
+	        return false;
+	    }  
+		
+	 	// empno 중복검사
+		if(empNo != "") {
+	        $.ajax({
+	        	contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+	            type : "POST",
+	            url : "empno_check.do",
+	            data : { empno : empNo },
+	            dataType: 'text',
+	            async : false,
+	            success : function(data) {
+	                console.log(data);
+	                if(data > 0){
+						alert("This number is already in use.");
+						result = false;
+						form.empno.focus();
+						form.empno.value = "";
+	                	$("#msg").hide();
+	                }
+	            },
+	            error : function(e){
+	                alert("Error : " + e.status);
+	            }
+	        });
+	        return result;
 		}
 	}
-
+	
 </script> 
 </head>
 <body>
@@ -97,7 +126,7 @@
 		</div>
 		<br />
 		<form name="empnoForm" action="${ pageContext.request.contextPath }/${ page }" method="post" onsubmit="return validateForm(this);">
-		<input type="hidden" value="${ modify.empno }" name="empno" />
+		<input type="hidden" value="${ modify.empno }" name="${ empno }" />
 		<table class="table table-bordered align-middle">
 		<tr>
 		<th class="col-3">No</th>
