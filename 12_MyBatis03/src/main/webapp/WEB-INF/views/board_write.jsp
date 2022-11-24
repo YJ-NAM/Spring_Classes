@@ -1,11 +1,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page session="false" pageEncoding="UTF-8" %>
+<% pageContext.setAttribute("newline", "\n"); %>
 <!-- 생성 -->
 <c:if test="${ empty modify }" >
 <c:set var="required" value="required='required'" />
 <c:set var="disabled" value="" />
 <c:set var="address" value="board_write_ok.do" />
 <c:set var="word" value="Save" />
+<c:set var="board_no" value="" />
 </c:if>
 <!-- 수정 -->
 <c:if test="${ not empty modify }" >
@@ -13,6 +16,7 @@
 <c:set var="disabled" value="disabled='disabled'" />
 <c:set var="address" value="board_modify_ok.do" />
 <c:set var="word" value="Modify" />
+<c:set var="board_no" value="board_no" />
 </c:if>
 <html>
 <head>
@@ -48,7 +52,7 @@
 		</div>
 		<br />
 		<form name="modifyForm" action="${ pageContext.request.contextPath }/${ address }" method="post" onsubmit="return pwdCheck(this);">
-		<input type="hidden" name="board_no" value="${ modify.board_no }" />
+		<input type="hidden" name="${ board_no }" value="${ modify.board_no }" />
 		<input type="hidden" name="page" value="${ page }" />
 		<table class="table align-middle">
 			<tr>
@@ -60,8 +64,8 @@
 				<td><input type="text" class="form-control" name="board_title" ${ required } value="${ modify.board_title }" /></td>
 			</tr>
 			<tr>
-				<th>Content</th>
-				<td><textarea class="form-control" name="board_cont" cols="30" rows="10">${ modify.board_cont }</textarea></td>
+				<th>Content</th>				
+				<td><textarea class="form-control" name="board_cont" cols="30" rows="10">${fn:replace(${ modify.board_cont }, newline, "<br/>")}</textarea></td>
 			</tr>
 			<tr>
 				<th>Password</th>
