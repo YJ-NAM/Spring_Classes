@@ -65,7 +65,7 @@
 		<br />
 		
 		<!-- 페이징 처리 부분 -->
-		<nav aria-label="Page navigation example">
+		<nav aria-label="Page navigation">
 		  <ul class="pagination justify-content-center">
 		  
 			<!-- 처음으로 -->

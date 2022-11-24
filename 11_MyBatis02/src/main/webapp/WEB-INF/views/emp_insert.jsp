@@ -94,7 +94,6 @@
 	            dataType: 'text',
 	            async : false,
 	            success : function(data) {
-	                console.log(data);
 	                if(data > 0){
 						alert("This number is already in use.");
 						result = false;

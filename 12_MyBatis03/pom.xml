@@ -83,7 +83,7 @@
 			<scope>runtime</scope>
 		</dependency>
 		
-				<!-- mybatis 프레임워크 라이브러리 -->
+		<!-- mybatis 프레임워크 라이브러리 -->
 		<dependency>
 		    <groupId>org.mybatis</groupId>
 		    <artifactId>mybatis</artifactId>
