@@ -1,5 +1,7 @@
 package com.mybatis.model;
 
+import java.util.Map;
+
 import lombok.Data;
 
 // 페이징 처리 작업 시 작업할 내용을 설정하는 객체
@@ -46,6 +48,15 @@ public class PageDTO {
         if(this.endBlock > this.allPage) {
         	this.endBlock = this.allPage;
         }
-        
 	} // 인자 생성자
+	
+	// 검색 페이징 처리 인자 생성자
+	public PageDTO(int page, int rowsize, int totalRecord, String field, String keyword) {
+		
+		this(page, rowsize, totalRecord);
+		this.field = field;
+		this.keyword = keyword;
+		
+	}	// 인자 생성자
 }
+        

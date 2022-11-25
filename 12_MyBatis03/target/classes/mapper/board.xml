@@ -51,4 +51,60 @@
 	<update id="seq" parameterType="int">
 		update board set board_no = board_no - 1 where board_no > #{no}
 	</update>
+	
+	<!-- 정보를 검색하는 쿼리문  -->
+	<select id="allSearch_cnt" resultType="int">
+        select count(*) from board where (board_title like '%'||#{ keyword }||'%') or (board_cont like '%'||#{ keyword }||'%') or (board_writer like '%'||#{ keyword }||'%')
+    </select>	
+    <select id="title_cnt" resultType="int">
+        select count(*) from board where board_title like '%'||#{ keyword }||'%'
+    </select>
+    <select id="cont_cnt" resultType="int">
+        select count(*) from board where board_cont like '%'||#{ keyword }||'%'
+    </select>
+    <select id="writer_cnt" resultType="int">
+        select count(*) from board where board_writer like '%'||#{ keyword }||'%'
+    </select>
+
+
+    <!-- 정보를 검색하는 쿼리문  -->
+    <select id="allSearch" parameterType="pagedto" resultType="boarddto">
+        <![CDATA[select * from (select b.*, row_number() over(order by board_no desc) rnum from board b where (board_title like '%'||#{ keyword }||'%') or (board_cont like '%'||#{ keyword }||'%') or (board_writer like '%'||#{ keyword }||'%')) where rnum >= #{startNo} and rnum <= #{endNo}]]>
+    </select>
+    
+    <select id="title" parameterType="pagedto" resultType="boarddto">
+        <![CDATA[select * from (select b.*, row_number() over(order by board_no desc) rnum from board b where board_title like '%'||#{ keyword }||'%') where rnum >= #{startNo} and rnum <= #{endNo}]]>
+    </select>
+
+    <select id="cont" parameterType="pagedto" resultType="boarddto">
+        <![CDATA[select * from (select b.*, row_number() over(order by board_no desc) rnum from board b where board_cont like '%'||#{ keyword }||'%') where rnum >= #{startNo} and rnum <= #{endNo}]]>
+    </select>
+
+    <select id="writer" parameterType="pagedto" resultType="boarddto">
+        <![CDATA[select * from (select b.*, row_number() over(order by board_no desc) rnum from board b where board_writer like '%'||#{ keyword }||'%') where rnum >= #{startNo} and rnum <= #{endNo}]]>
+    </select>
+    
+    
+  	<!-- 검색어에 해당하는 record 수를 구하는 쿼리문 -->
+  	<!-- 
+	<select id="search_count" resultType="int">
+		select count(*) from board 
+		<choose>
+			<when test="field.equals('all')">where board_title like '%'||#{ keyword }||'%'</when>
+			<when test="field.equals('title')">where board_title like '%'||#{ keyword }||'%'</when>
+			<when test="field.equals('writer')">where board_writer like '%'||#{ keyword }||'%'</when>
+			<when test="field.equals('content')">where board_cont like '%'||#{ keyword }||'%'</when>
+		</choose>
+	</select>
+	<select id="" parameterType="pagedto" resultType="boarddto" >
+		select * from board 
+		<choose>
+			<when test="field.equals('all')">where (board_title like '%'||#{ keyword }||'%') or (board_cont like '%'||#{ keyword }||'%') or (board_writer like '%'||#{ keyword }||'%')</when>
+			<when test="field.equals('title')">where board_title like '%'||#{ keyword }||'%'</when>
+			<when test="field.equals('writer')">where board_writer like '%'||#{ keyword }||'%'</when>
+			<when test="field.equals('content')">where board_cont like '%'||#{ keyword }||'%'</when>
+		</choose>
+		order by board_no desc
+	</select> --> 
+	
 </mapper>

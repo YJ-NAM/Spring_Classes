@@ -106,5 +106,18 @@ public class BoardController {
 			out.println("<script>alert('Fail:<'); history.back(); </script>");
 		}
 	}
+	
+	@RequestMapping("board_search.do")
+	public String search(@RequestParam("field") String field, @RequestParam("keyword") String keyword, @RequestParam("page") int page, Model model) {
+		totalRecord = this.dao.searchBoardCount(field, keyword);
+		PageDTO pdto = new PageDTO(page, rowsize, totalRecord, field, keyword);		
+		// 검색 시 한 페이지당 보여질 게시물의 수만큼 검색한 게시물을 List로 가져오는 메서드 호출.
+		List<BoardDTO> searchList = this.dao.searchBoardList(pdto);		
+		model.addAttribute("list", searchList);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("field", field);
+		model.addAttribute("paging", pdto);		
+		return "board_list";
+	}
 
 }

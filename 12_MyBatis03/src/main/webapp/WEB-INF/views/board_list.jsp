@@ -3,6 +3,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="list" value="${ list }" />
 <c:set var="paging" value="${ paging }" />
+<!-- 검색 -->
+<c:if test="${ not empty keyword }">
+<c:set var="addr" value="board_search.do" />
+<c:set var="faddr" value="&field=" />
+<c:set var="kaddr" value="&keyword=" />
+</c:if>
+<!-- 전체 -->
+<c:if test="${ empty keyword }">
+<c:set var="addr" value="board_list.do" />
+<c:set var="faddr" value="" />
+<c:set var="kaddr" value="" />
+<c:set var="field" value="" />
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,7 +84,7 @@
 			<!-- 처음으로 -->
 			<c:if test="${ paging.page eq 1 }"><li class="page-item disabled"></c:if>
 			<c:if test="${ paging.page gt 1 }"><li class="page-item"></c:if>
-			  <a class="page-link" href="board_list.do?page=1" aria-label="First">
+			  <a class="page-link" href="${ addr }?page=1${ faddr }${ field }${ kaddr }${ keyword }" aria-label="First">
 			  <span aria-hidden="true">&laquo;</span>
 			  </a> 
 			</li>
@@ -79,7 +92,7 @@
 		    <!-- 이전으로 -->
 			<c:if test="${ paging.page eq 1 }"><li class="page-item disabled"></c:if>
 			<c:if test="${ paging.page gt paging.block }"><li class="page-item"></c:if>		      
-			  <a class="page-link" href="board_list.do?page=${ paging.page - 1 }" aria-label="Previous">
+			  <a class="page-link" href="${ addr }?page=${ paging.page - 1 }${ faddr }${ field }${ kaddr }${ keyword }" aria-label="Previous">
 			  <span aria-hidden="true">&lsaquo;</span>
 			  </a>
 			</li>			   
@@ -87,17 +100,17 @@
 		    <!-- 페이지 중간 -->
 			<c:forEach begin="${ paging.startBlock }" end="${ paging.endBlock }" var="i">
 				<c:if test="${ i == paging.page }">
-				<li class="page-item active"><a class="page-link" href="board_list.do?page=${ i }">${ i }</a></li>			
+				<li class="page-item active"><a class="page-link" href="${ addr }?page=${ i }${ faddr }${ field }${ kaddr }${ keyword }">${ i }</a></li>			
 				</c:if>
 				<c:if test="${ i != paging.page }">
-				<li class="page-item"><a class="page-link" href="board_list.do?page=${ i }">${ i }</a></li>				
+				<li class="page-item"><a class="page-link" href="${ addr }?page=${ i }${ faddr }${ field }${ kaddr }${ keyword }">${ i }</a></li>				
 				</c:if>
 			</c:forEach>
 	      
 	        <!-- 다음으로 -->
 		    <c:if test="${ paging.endBlock lt paging.allPage }"><li class="page-item"></c:if>
 		    <c:if test="${ paging.endBlock eq paging.allPage }"><li class="page-item disabled"></c:if>
-		      <a class="page-link" href="board_list.do?page=${ paging.page + 1 }" aria-label="Next">
+		      <a class="page-link" href="${ addr }?page=${ paging.page + 1 }${ faddr }${ field }${ kaddr }${ keyword }" aria-label="Next">
 		        <span aria-hidden="true">&rsaquo;</span>
 		      </a>
 		    </li>		      
@@ -105,22 +118,26 @@
 		    <!-- 마지막으로 -->
 		    <c:if test="${ paging.endBlock lt paging.allPage }"><li class="page-item"></c:if>
 		    <c:if test="${ paging.endBlock eq paging.allPage }"><li class="page-item disabled"></c:if>
-		      <a class="page-link" href="board_list.do?page=${ paging.allPage }" aria-label="Last">
+		      <a class="page-link" href="${ addr }?page=${ paging.allPage }${ faddr }${ field }${ kaddr }${ keyword }" aria-label="Last">
 		        <span aria-hidden="true">&raquo;</span>
 		      </a>
 		  </ul>
 		</nav>
 		
 		<div class="d-inline">
-			<form action="${ pageContext.request.contextPath }/board_search.do?field=${ field }&keyword=${ keyword }">
+			<form method="post" action="${ pageContext.request.contextPath }/board_search.do">
+			<input type="hidden" name="page" value="${ paging.page }" />
 			<select name="field" class="form-select d-inline w-25">
-				<option value="All"<c:if test="${ field eq 'All' }">selected="selected"</c:if>>All</option>
-				<option value="Title"<c:if test="${ field eq 'Title' }">selected="selected"</c:if>>Title</option>
-				<option value="Writer"<c:if test="${ field eq 'Writer' }">selected="selected"</c:if>>Writer</option>
-				<option value="c"<c:if test="${ field eq 'Writer' }">selected="selected"</c:if>>Content</option>
+				<option value="allSearch"<c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>All</option>
+				<option value="title"<c:if test="${ field eq 'title' }">selected="selected"</c:if>>Title</option>
+				<option value="writer"<c:if test="${ field eq 'writer' }">selected="selected"</c:if>>Writer</option>
+				<option value="content"<c:if test="${ field eq 'content' }">selected="selected"</c:if>>Content</option>
 			</select>
 			<input type="text" class="form-control d-inline w-50" name="keyword" value="${ keyword }" />
-			<button type="submit" class="btn btn-dark">Search</button>
+			<button type="submit" class="btn btn-dark">
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+  			<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg>
+  			 Search</button>
 			</form>
 		</div>			
 	</div>
