@@ -3,6 +3,7 @@
 <%@ page session="false" pageEncoding="UTF-8" %>
 <% pageContext.setAttribute("newline", "\n"); %>
 <c:set var="cont" value="${ cont }" />
+<c:set var="page" value="${ page }" />
 <html>
 <head>
 	<title>Content</title>

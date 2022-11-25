@@ -65,7 +65,7 @@
 			</tr>
 			<tr>
 				<th>Content</th>				
-				<td><textarea class="form-control" name="board_cont" cols="30" rows="10">${fn:replace(${ modify.board_cont }, newline, "<br/>")}</textarea></td>
+				<td><textarea class="form-control" name="board_cont" cols="30" rows="10">${fn:replace(modify.board_cont, newline, "<br/>")}</textarea></td>
 			</tr>
 			<tr>
 				<th>Password</th>

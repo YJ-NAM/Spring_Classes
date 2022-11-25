@@ -95,7 +95,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("board_delete.do")
-	public void delete(@RequestParam("no") int no, @RequestParam("page") int page, HttpServletResponse response) throws IOException {
+	public void delete(@RequestParam("board_no") int no, @RequestParam("page") int page, HttpServletResponse response) throws IOException {
 		int check = this.dao.deleteBoard(no);
 		this.dao.updateSequence(no);
 		response.setContentType("text/html; charset=UTF-8");
