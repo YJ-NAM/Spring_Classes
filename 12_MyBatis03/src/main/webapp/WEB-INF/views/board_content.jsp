@@ -1,5 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page session="false" pageEncoding="UTF-8" %>
+<% pageContext.setAttribute("newline", "\n"); %>
 <c:set var="cont" value="${ cont }" />
 <html>
 <head>
@@ -44,7 +46,7 @@
 			</tr>
 			<tr>
 				<th>Content</th>
-				<td colspan="5">${ cont.board_cont }</td>
+				<td colspan="5">${fn:replace(cont.board_cont, newline, '<br/>')}</td>
 			</tr>
 			<c:if test="${ empty cont.board_update }">
 			<tr>

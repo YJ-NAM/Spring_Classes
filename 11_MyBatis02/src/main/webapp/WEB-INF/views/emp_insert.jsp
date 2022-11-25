@@ -117,7 +117,7 @@
 		<br />
 		<div class="title_container py-3">
 			<c:if test="${ empty modify }">
-			<h3>Register new Employee</h3>
+			<h3>Register New Employee</h3>
 			</c:if>
 			<c:if test="${ !empty modify }">
 			<h3>Modify ${ modify.ename }</h3>
