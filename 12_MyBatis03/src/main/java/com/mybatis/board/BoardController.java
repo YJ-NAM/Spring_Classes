@@ -93,5 +93,18 @@ public class BoardController {
 			out.println("<script>alert('Fail:<'); history.back(); </script>");
 		}
 	}
+	
+	@RequestMapping("board_delete.do")
+	public void delete(@RequestParam("no") int no, @RequestParam("page") int page, HttpServletResponse response) throws IOException {
+		int check = this.dao.deleteBoard(no);
+		this.dao.updateSequence(no);
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		if(check > 0) {
+			out.println("<script>alert('Success:)'); location.href='board_list.do?page="+page+"'; </script>");
+		}else {
+			out.println("<script>alert('Fail:<'); history.back(); </script>");
+		}
+	}
 
 }

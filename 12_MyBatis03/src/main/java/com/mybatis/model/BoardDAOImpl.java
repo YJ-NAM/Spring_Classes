@@ -45,14 +45,12 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public int deleteBoard(int no) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.sqlSession.delete("delete", no);
 	}
 
 	@Override
 	public void updateSequence(int no) {
-		// TODO Auto-generated method stub
-		
+		this.sqlSession.update("seq", no);
 	}
 
 	@Override
