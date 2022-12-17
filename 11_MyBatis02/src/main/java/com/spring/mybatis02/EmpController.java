@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.model.DeptDTO;
 import com.spring.model.EmpDAO;
@@ -108,11 +109,13 @@ public class EmpController {
     	}
     }
     
-    @RequestMapping("/empno_check.do")
-    public int empCheck(@RequestParam("empno") String empno) {
-    	int empnoInt = Integer.parseInt(empno);
-    	System.out.println(empnoInt);
-    	int check = this.dao.noCheck(empnoInt);
-		return check;
+    // @ResponseBody 데이터 자체를 리턴 => json 형식으로 return 됨
+    @RequestMapping("empno_check.do")
+    public @ResponseBody int empCheck(@RequestParam("empno") String empno) throws IOException {
+    	int empInt = 0;
+    	if(!empno.isBlank()) {
+    		empInt = Integer.parseInt(empno);
+    	}
+    	return this.dao.noCheck(empInt);
     }
 }

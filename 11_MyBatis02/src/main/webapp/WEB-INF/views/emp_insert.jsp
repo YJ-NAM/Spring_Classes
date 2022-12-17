@@ -10,6 +10,8 @@
 	<c:set var="disabled" value="disabled='disabled'" />
 	<c:set var="page" value="emp_modify_ok.do" />
 	<c:set var="word" value="Modify" />
+	<c:set var="autofocus" value="" />
+	<c:set var="empno" value="empno" />
 </c:if>
 <!-- 생성 -->
 <c:if test="${ empty modify }" >
@@ -17,6 +19,8 @@
 	<c:set var="disabled" value="" />
 	<c:set var="page" value="emp_insert_ok.do" />
 	<c:set var="word" value="Register" />
+	<c:set var="autofocus" value="autofocus" />
+	<c:set var="empno" value="" />
 </c:if>
 <!DOCTYPE html>
 <html>
@@ -33,33 +37,79 @@
 <script>
 	
 	$(function() {
-        $("#msg").hide();	                    
 		$("input[name='empno']").on("keyup", function() {
 			let empNo = $(this).val().trim();
-			console.log(empNo);
-			
+			let pattern = /^\d{4}$/;
+			if(empNo != "") {
+				$("#msg").show().html("Enter a 4-digit number.");	                    
+		        $.ajax({
+		        	contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+		            type : "POST",
+		            url : "empno_check.do",
+		            data : { empno : empNo },
+		            dataType: 'text',
+		            success : function(data) {
+		                console.log(data);
+		                if(data > 0){
+		                    $("#msg").show().html("This number is already in use.");
+		                }else{	             
+		                    if(!pattern.test(empNo)) {
+			                	$("#msg").show().html("Enter a 4-digit number.");
+		                    }else {
+			                	$("#msg").hide();
+		                    }
+		                }
+		            },
+		            error : function(e){
+		                alert("Error : " + e.status);
+		            }
+		        });
+			}
+		});
+	});
+	
+	// 유효성 검사
+	function validateForm(form) {
+		
+		let empNo = $("input[name='empno']").val().trim();
+		let pattern = /^\d{4}$/;
+		let result = false;
+		
+		// empno 조건검사
+	    if(!pattern.test(empNo)) {
+	        alert("Enter a 4-digit number.");
+	        form.empno.focus();
+	        form.empno.value = "";
+        	$("#msg").hide();
+	        return false;
+	    }  
+		
+	 	// empno 중복검사
+		if(empNo != "") {
 	        $.ajax({
 	        	contentType : "application/x-www-form-urlencoded;charset=UTF-8",
-	            type : "post",
-	            url : "${pageContext.request.contextPath}/empno_check.do",
+	            type : "POST",
+	            url : "empno_check.do",
 	            data : { empno : empNo },
-	            dataType: 'json',
+	            dataType: 'text',
+	            async : false,
 	            success : function(data) {
-	                console.log(data);
 	                if(data > 0){
-	                    $("#msg").html("There is a same number. Please choose another number.");
-	                }else{	                   
-	                	$("#msg").hide();	                    
+						alert("This number is already in use.");
+						result = false;
+						form.empno.focus();
+						form.empno.value = "";
+	                	$("#msg").hide();
 	                }
 	            },
 	            error : function(e){
-	            	console.log(empNo);
 	                alert("Error : " + e.status);
 	            }
 	        });
-		});
-	});
-
+	        return result;
+		}
+	}
+	
 </script> 
 </head>
 <body>
@@ -67,22 +117,24 @@
 		<br />
 		<div class="title_container py-3">
 			<c:if test="${ empty modify }">
-			<h3>Register new Employee</h3>
+			<h3>Register New Employee</h3>
 			</c:if>
 			<c:if test="${ !empty modify }">
 			<h3>Modify ${ modify.ename }</h3>
 			</c:if>
 		</div>
 		<br />
-		<form action="${ pageContext.request.contextPath }/${ page }" method="post">
-		<input type="hidden" value="${ modify.empno }" name="empno" />
+		<form name="empnoForm" action="${ pageContext.request.contextPath }/${ page }" method="post" onsubmit="return validateForm(this);">
+		<input type="hidden" value="${ modify.empno }" name="${ empno }" />
 		<table class="table table-bordered align-middle">
 		<tr>
-		<th>No</th>
-		<td>
-		<input type="text" name="empno" class="form-control" ${ required } ${ disabled } value="${ modify.empno }"/>
+		<th class="col-3">No</th>
+		<td class="col-9">
+		<input type="text" name="empno" class="form-control" ${ required } ${ disabled } ${ autofocus } value="${ modify.empno }"/>
 			<c:if test="${ empty modify }">
-			<div class="d-flex align-middle"><span id="msg" class="text-left">중복확인 메세지</span></div>
+			<div class="d-flex align-middle">
+				<span id="msg" class="text-left">Only numbers can be entered.</span>
+			</div>
 			</c:if>		
 		</td>
 		</tr>
@@ -133,7 +185,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				<input type="submit" value="${ word }" class="btn btn-outline-success"/>
+				<input type="submit" value="${ word }" class="btn btn-outline-success" />
 				<input type="reset" value="Rewrite" class="btn btn-outline-warning"/>
 				<input type="button" value="List" class="btn btn-outline-secondary" onclick="location.href='emp_list.do'"/>
 			</td>
